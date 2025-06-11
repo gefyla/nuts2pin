@@ -121,8 +121,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A1A1A1A1A1A1A1A1A1A1A1C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A1D /* ContentView.swift */; };
-				1A1A1A1A1A1A1A1A1A1A1A1A /* Nuts2PinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A1B /* Nuts2PinApp.swift */; };
+				1A1A1A1A1A1A1A1A1A1A1A1C /* ContentView.swift in Sources */,
+				1A1A1A1A1A1A1A1A1A1A1A1A /* Nuts2PinApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
