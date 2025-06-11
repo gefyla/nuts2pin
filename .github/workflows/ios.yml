@@ -1,0 +1,33 @@
+name: iOS Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build and Archive
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Select Xcode
+      run: sudo xcode-select -switch /Applications/Xcode_16.0.app
+
+    - name: Build
+      run: |
+        xcodebuild clean build -project nuts2pin.xcodeproj -scheme nuts2pin -configuration Release -sdk iphoneos CODE_SIGN_IDENTITY="gefyla" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO IPHONEOS_DEPLOYMENT_TARGET=18.0
+
+    - name: Create IPA
+      run: |
+        mkdir -p build/Release-iphoneos
+        /usr/bin/xcrun -sdk iphoneos PackageApplication -v build/Release-iphoneos/nuts2pin.app -o build/Release-iphoneos/nuts2pin.ipa
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: nuts2pin.ipa
+        path: build/Release-iphoneos/nuts2pin.ipa 
