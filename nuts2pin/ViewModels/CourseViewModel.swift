@@ -6,7 +6,11 @@ import MapKit
 
 class CourseViewModel: ObservableObject {
     @Published var currentCourse: Course?
-    @Published var currentHoleIndex: Int = 0
+    @Published var currentHole: Hole?
+    @Published var selectedTeeBox: String = "White"
+    @Published var customPinLocation: CLLocationCoordinate2D?
+    @Published var userLocation: CLLocationCoordinate2D?
+    @Published var isMapRealistic: Bool = true
     @Published var totalScore: Int = 0
     @Published var frontNineScore: Int = 0
     @Published var backNineScore: Int = 0
@@ -17,14 +21,7 @@ class CourseViewModel: ObservableObject {
     @Published var practiceLocation: Coordinate?
     
     private var locationManager = CLLocationManager()
-    private var userLocation: CLLocation?
     private var cancellables = Set<AnyCancellable>()
-    
-    var currentHole: Hole? {
-        guard let course = currentCourse,
-              currentHoleIndex < course.holes.count else { return nil }
-        return course.holes[currentHoleIndex]
-    }
     
     var scoreToPar: Int {
         guard let course = currentCourse else { return 0 }
@@ -38,7 +35,7 @@ class CourseViewModel: ObservableObject {
     
     var holesInProgress: Int {
         guard let course = currentCourse else { return 0 }
-        return course.holes.filter { !$0.shots.isEmpty }.count
+        return course.holes.filter { $0.score != nil }.count
     }
     
     init() {
@@ -61,37 +58,51 @@ class CourseViewModel: ObservableObject {
     
     func loadCourse(_ course: Course) {
         currentCourse = course
-        currentHoleIndex = 0
+        currentHole = course.holes.first
         updateScores()
     }
     
     func nextHole() {
         guard let course = currentCourse,
-              currentHoleIndex < course.holes.count - 1 else { return }
-        currentHoleIndex += 1
-        updateDistances()
+              let currentHole = currentHole,
+              let currentIndex = course.holes.firstIndex(where: { $0.number == currentHole.number }),
+              currentIndex + 1 < course.holes.count else { return }
+        self.currentHole = course.holes[currentIndex + 1]
     }
     
     func previousHole() {
-        guard currentHoleIndex > 0 else { return }
-        currentHoleIndex -= 1
-        updateDistances()
+        guard let course = currentCourse,
+              let currentHole = currentHole,
+              let currentIndex = course.holes.firstIndex(where: { $0.number == currentHole.number }),
+              currentIndex > 0 else { return }
+        self.currentHole = course.holes[currentIndex - 1]
     }
     
-    func recordShot(_ shot: Shot) {
+    func recordShot() {
         guard var hole = currentHole else { return }
-        hole.shots.append(shot)
-        currentCourse?.holes[currentHoleIndex] = hole
+        hole.shots.append(Shot())
         updateScores()
-        updateDistances()
     }
     
-    func updateScores() {
+    func updateScore(for hole: Hole, score: Int) {
+        guard var course = currentCourse,
+              let index = course.holes.firstIndex(where: { $0.number == hole.number }) else { return }
+        course.holes[index].score = score
+        currentCourse = course
+        updateScores()
+    }
+    
+    private func updateScores() {
         guard let course = currentCourse else { return }
         
-        totalScore = course.holes.reduce(0) { $0 + $1.shots.count }
-        frontNineScore = course.holes.prefix(9).reduce(0) { $0 + $1.shots.count }
-        backNineScore = course.holes.suffix(9).reduce(0) { $0 + $1.shots.count }
+        // Calculate front nine score
+        frontNineScore = course.holes.prefix(9).compactMap { $0.score }.reduce(0, +)
+        
+        // Calculate back nine score
+        backNineScore = course.holes.suffix(9).compactMap { $0.score }.reduce(0, +)
+        
+        // Calculate total score
+        totalScore = frontNineScore + backNineScore
     }
     
     func selectTeeBox(_ teeBox: TeeBox) {
@@ -168,8 +179,8 @@ class CourseViewModel: ObservableObject {
             currentLocation = practiceLocation ?? teeBox.location
         } else if let userLocation = userLocation {
             currentLocation = Coordinate(
-                latitude: userLocation.coordinate.latitude,
-                longitude: userLocation.coordinate.longitude
+                latitude: userLocation.latitude,
+                longitude: userLocation.longitude
             )
         } else {
             currentLocation = teeBox.location
@@ -186,7 +197,7 @@ class CourseViewModel: ObservableObject {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        userLocation = locations.last
+        userLocation = locations.last?.coordinate
         if !isPracticeMode {
             updateDistances()
         }
@@ -197,12 +208,5 @@ class CourseViewModel: ObservableObject {
         if let location = locationManager.location {
             updateDistances(with: location)
         }
-    }
-    
-    // MARK: - Score Statistics
-    
-    var holesInProgress: Int {
-        guard let course = currentCourse else { return 0 }
-        return course.holes.filter { !$0.shots.isEmpty }.count
     }
 } 

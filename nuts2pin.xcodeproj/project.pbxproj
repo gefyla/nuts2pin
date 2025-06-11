@@ -8,12 +8,16 @@
 		/* Begin PBXBuildFile section */
 		1A1A1A1A1A1A1A1A1A1A1A1A /* Nuts2PinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A1B /* Nuts2PinApp.swift */; };
 		1A1A1A1A1A1A1A1A1A1A1A1C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A1D /* ContentView.swift */; };
+		1A1A1A1A1A1A1A1A1A1A1A2E /* CourseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A2F /* CourseViewModel.swift */; };
+		1A1A1A1A1A1A1A1A1A1A1A30 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A31 /* SplashScreenView.swift */; };
 		/* End PBXBuildFile section */
 
 		/* Begin PBXFileReference section */
 		1A1A1A1A1A1A1A1A1A1A1A1E /* nuts2pin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nuts2pin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A1A1A1A1A1A1A1A1A1A1A1B /* Nuts2PinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nuts2PinApp.swift; sourceTree = "<group>"; };
 		1A1A1A1A1A1A1A1A1A1A1A1D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1A1A1A1A1A1A1A1A1A1A1A2F /* CourseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseViewModel.swift; sourceTree = "<group>"; };
+		1A1A1A1A1A1A1A1A1A1A1A31 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		/* End PBXFileReference section */
 
 		/* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +52,8 @@
 			children = (
 				1A1A1A1A1A1A1A1A1A1A1A1B /* Nuts2PinApp.swift */,
 				1A1A1A1A1A1A1A1A1A1A1A1D /* ContentView.swift */,
+				1A1A1A1A1A1A1A1A1A1A1A2F /* CourseViewModel.swift */,
+				1A1A1A1A1A1A1A1A1A1A1A31 /* SplashScreenView.swift */,
 				1A1A1A1A1A1A1A1A1A1A1A23 /* Assets.xcassets */,
 			);
 			path = nuts2pin;
@@ -123,6 +129,8 @@
 			files = (
 				1A1A1A1A1A1A1A1A1A1A1A1C /* ContentView.swift in Sources */,
 				1A1A1A1A1A1A1A1A1A1A1A1A /* Nuts2PinApp.swift in Sources */,
+				1A1A1A1A1A1A1A1A1A1A1A2E /* CourseViewModel.swift in Sources */,
+				1A1A1A1A1A1A1A1A1A1A1A30 /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
