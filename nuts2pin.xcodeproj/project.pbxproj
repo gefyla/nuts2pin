@@ -6,25 +6,44 @@
 	objectVersion = 56;
 	objects = {
 		/* Begin PBXBuildFile section */
-		1A1A1A1A1A1A1A1A1A1A1A1A /* nuts2pinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A1B /* nuts2pinApp.swift */; };
-		1A1A1A1A1A1A1A1A1A1A1A1C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A1D /* ContentView.swift */; };
-		1A1A1A1A1A1A1A1A1A1A1A1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A1F /* Assets.xcassets */; };
-		1A1A1A1A1A1A1A1A1A1A1A20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A21 /* Preview Assets.xcassets */; };
-		1A1A1A1A1A1A1A1A1A1A1A2E /* CourseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A2F /* CourseViewModel.swift */; };
+		2A0000012A2A2A2A2A2A2A01 /* Nuts2PinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000012A2A2A2A2A2A2A01 /* Nuts2PinApp.swift */; };
+		2A0000022A2A2A2A2A2A2A02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000022A2A2A2A2A2A2A02 /* ContentView.swift */; };
+		2A0000032A2A2A2A2A2A2A03 /* CourseSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000032A2A2A2A2A2A2A03 /* CourseSelectionView.swift */; };
+		2A0000042A2A2A2A2A2A2A04 /* CourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000042A2A2A2A2A2A2A04 /* CourseView.swift */; };
+		2A0000052A2A2A2A2A2A2A05 /* InteractiveCourseMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000052A2A2A2A2A2A2A05 /* InteractiveCourseMapView.swift */; };
+		2A0000062A2A2A2A2A2A2A06 /* ScoreInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000062A2A2A2A2A2A2A06 /* ScoreInputView.swift */; };
+		2A0000072A2A2A2A2A2A2A07 /* ScoringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000072A2A2A2A2A2A2A07 /* ScoringView.swift */; };
+		2A0000082A2A2A2A2A2A2A08 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000082A2A2A2A2A2A2A08 /* SplashScreenView.swift */; };
+		2A0000092A2A2A2A2A2A2A09 /* TeeBoxSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000092A2A2A2A2A2A2A09 /* TeeBoxSelectionView.swift */; };
+		2A0000102A2A2A2A2A2A2A10 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000102A2A2A2A2A2A2A10 /* Course.swift */; };
+		2A0000112A2A2A2A2A2A2A11 /* TeeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000112A2A2A2A2A2A2A11 /* TeeBox.swift */; };
+		2A0000122A2A2A2A2A2A2A12 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000122A2A2A2A2A2A2A12 /* LocationManager.swift */; };
+		2A0000132A2A2A2A2A2A2A13 /* SampleCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000132A2A2A2A2A2A2A13 /* SampleCourses.swift */; };
+		2A0000142A2A2A2A2A2A2A14 /* CourseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000142A2A2A2A2A2A2A14 /* CourseViewModel.swift */; };
+		2A0000152A2A2A2A2A2A2A15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A0000152A2A2A2A2A2A2A15 /* Assets.xcassets */; };
 		/* End PBXBuildFile section */
 
 		/* Begin PBXFileReference section */
-		1A1A1A1A1A1A1A1A1A1A1A22 /* nuts2pin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nuts2pin.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A1A1A1A1A1A1A1A1A1A1A1B /* nuts2pinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nuts2pinApp.swift; sourceTree = "<group>"; };
-		1A1A1A1A1A1A1A1A1A1A1A1D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		1A1A1A1A1A1A1A1A1A1A1A1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1A1A1A1A1A1A1A1A1A1A1A21 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		1A1A1A1A1A1A1A1A1A1A1A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1A1A1A1A1A1A1A1A1A1A1A2F /* CourseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CourseViewModel.swift; path = ViewModels/CourseViewModel.swift; sourceTree = "<group>"; };
+		3A0000012A2A2A2A2A2A2A01 /* Nuts2PinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nuts2PinApp.swift; sourceTree = "<group>"; };
+		3A0000022A2A2A2A2A2A2A02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/ContentView.swift; sourceTree = "<group>"; };
+		3A0000032A2A2A2A2A2A2A03 /* CourseSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/CourseSelectionView.swift; sourceTree = "<group>"; };
+		3A0000042A2A2A2A2A2A2A04 /* CourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/CourseView.swift; sourceTree = "<group>"; };
+		3A0000052A2A2A2A2A2A2A05 /* InteractiveCourseMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/InteractiveCourseMapView.swift; sourceTree = "<group>"; };
+		3A0000062A2A2A2A2A2A2A06 /* ScoreInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/ScoreInputView.swift; sourceTree = "<group>"; };
+		3A0000072A2A2A2A2A2A2A07 /* ScoringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/ScoringView.swift; sourceTree = "<group>"; };
+		3A0000082A2A2A2A2A2A2A08 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/SplashScreenView.swift; sourceTree = "<group>"; };
+		3A0000092A2A2A2A2A2A2A09 /* TeeBoxSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/TeeBoxSelectionView.swift; sourceTree = "<group>"; };
+		3A0000102A2A2A2A2A2A2A10 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/Course.swift; sourceTree = "<group>"; };
+		3A0000112A2A2A2A2A2A2A11 /* TeeBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/TeeBox.swift; sourceTree = "<group>"; };
+		3A0000122A2A2A2A2A2A2A12 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Managers/LocationManager.swift; sourceTree = "<group>"; };
+		3A0000132A2A2A2A2A2A2A13 /* SampleCourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data/SampleCourses.swift; sourceTree = "<group>"; };
+		3A0000142A2A2A2A2A2A2A14 /* CourseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.xcassets/CourseViewModel.swift; sourceTree = "<group>"; };
+		3A0000152A2A2A2A2A2A2A15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3A0000162A2A2A2A2A2A2A16 /* nuts2pin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nuts2pin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		/* End PBXFileReference section */
 
 		/* Begin PBXFrameworksBuildPhase section */
-		1A1A1A1A1A1A1A1A1A1A1A24 /* Frameworks */ = {
+		5A0000032A2A2A2A2A2A2A03 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -34,53 +53,85 @@
 		/* End PBXFrameworksBuildPhase section */
 
 		/* Begin PBXGroup section */
-		1A1A1A1A1A1A1A1A1A1A1A25 = {
+		4A0000002A2A2A2A2A2A2A00 /* Main group */ = {
 			isa = PBXGroup;
 			children = (
-				1A1A1A1A1A1A1A1A1A1A1A26 /* nuts2pin */,
-				1A1A1A1A1A1A1A1A1A1A1A27 /* Products */,
+				4A0000012A2A2A2A2A2A2A01 /* nuts2pin */,
+				4A0000022A2A2A2A2A2A2A02 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		1A1A1A1A1A1A1A1A1A1A1A27 /* Products */ = {
+		4A0000012A2A2A2A2A2A2A01 /* nuts2pin */ = {
 			isa = PBXGroup;
 			children = (
-				1A1A1A1A1A1A1A1A1A1A1A22 /* nuts2pin.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		1A1A1A1A1A1A1A1A1A1A1A26 /* nuts2pin */ = {
-			isa = PBXGroup;
-			children = (
-				1A1A1A1A1A1A1A1A1A1A1A1B /* nuts2pinApp.swift */,
-				1A1A1A1A1A1A1A1A1A1A1A1D /* ContentView.swift */,
-				1A1A1A1A1A1A1A1A1A1A1A1F /* Assets.xcassets */,
-				1A1A1A1A1A1A1A1A1A1A1A23 /* Info.plist */,
-				1A1A1A1A1A1A1A1A1A1A1A28 /* Preview Content */,
-				1A1A1A1A1A1A1A1A1A1A1A2F /* CourseViewModel.swift */,
+				3A0000012A2A2A2A2A2A2A01 /* Nuts2PinApp.swift */,
+				4A0000032A2A2A2A2A2A2A03 /* Views */,
+				4A0000042A2A2A2A2A2A2A04 /* Models */,
+				4A0000052A2A2A2A2A2A2A05 /* Managers */,
+				4A0000062A2A2A2A2A2A2A06 /* Data */,
+				3A0000152A2A2A2A2A2A2A15 /* Assets.xcassets */,
 			);
 			path = nuts2pin;
 			sourceTree = "<group>";
 		};
-		1A1A1A1A1A1A1A1A1A1A1A28 /* Preview Content */ = {
+		4A0000022A2A2A2A2A2A2A02 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1A1A1A1A1A1A1A1A1A1A1A21 /* Preview Assets.xcassets */,
+				3A0000162A2A2A2A2A2A2A16 /* nuts2pin.app */,
 			);
-			path = "Preview Content";
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4A0000032A2A2A2A2A2A2A03 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A0000022A2A2A2A2A2A2A02 /* ContentView.swift */,
+				3A0000032A2A2A2A2A2A2A03 /* CourseSelectionView.swift */,
+				3A0000042A2A2A2A2A2A2A04 /* CourseView.swift */,
+				3A0000052A2A2A2A2A2A2A05 /* InteractiveCourseMapView.swift */,
+				3A0000062A2A2A2A2A2A2A06 /* ScoreInputView.swift */,
+				3A0000072A2A2A2A2A2A2A07 /* ScoringView.swift */,
+				3A0000082A2A2A2A2A2A2A08 /* SplashScreenView.swift */,
+				3A0000092A2A2A2A2A2A2A09 /* TeeBoxSelectionView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4A0000042A2A2A2A2A2A2A04 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3A0000102A2A2A2A2A2A2A10 /* Course.swift */,
+				3A0000112A2A2A2A2A2A2A11 /* TeeBox.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4A0000052A2A2A2A2A2A2A05 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				3A0000122A2A2A2A2A2A2A12 /* LocationManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		4A0000062A2A2A2A2A2A2A06 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3A0000132A2A2A2A2A2A2A13 /* SampleCourses.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		/* End PBXGroup section */
 
 		/* Begin PBXNativeTarget section */
-		1A1A1A1A1A1A1A1A1A1A1A29 /* nuts2pin */ = {
+		5A0000002A2A2A2A2A2A2A00 /* nuts2pin */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A1A1A1A1A1A1A1A1A1A1A2A /* Build configuration list for PBXNativeTarget "nuts2pin" */;
+			buildConfigurationList = 5A0000012A2A2A2A2A2A2A01 /* Build configuration list for PBXNativeTarget "nuts2pin" */;
 			buildPhases = (
-				1A1A1A1A1A1A1A1A1A1A1A2B /* Sources */,
-				1A1A1A1A1A1A1A1A1A1A1A24 /* Frameworks */,
-				1A1A1A1A1A1A1A1A1A1A1A2C /* Resources */,
+				5A0000022A2A2A2A2A2A2A02 /* Sources */,
+				5A0000032A2A2A2A2A2A2A03 /* Frameworks */,
+				5A0000042A2A2A2A2A2A2A04 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -88,25 +139,25 @@
 			);
 			name = nuts2pin;
 			productName = nuts2pin;
-			productReference = 1A1A1A1A1A1A1A1A1A1A1A22 /* nuts2pin.app */;
+			productReference = 3A0000162A2A2A2A2A2A2A16 /* nuts2pin.app */;
 			productType = "com.apple.product-type.application";
 		};
 		/* End PBXNativeTarget section */
 
 		/* Begin PBXProject section */
-		1A1A1A1A1A1A1A1A1A1A1A2D /* Project object */ = {
+		6A0000002A2A2A2A2A2A2A00 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					1A1A1A1A1A1A1A1A1A1A1A29 = {
+					5A0000002A2A2A2A2A2A2A00 = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
 			};
-			buildConfigurationList = 1A1A1A1A1A1A1A1A1A1A1A2E /* Build configuration list for PBXProject "nuts2pin" */;
+			buildConfigurationList = 6A0000012A2A2A2A2A2A2A01 /* Build configuration list for PBXProject "nuts2pin" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -114,47 +165,56 @@
 				en,
 				Base,
 			);
-			mainGroup = 1A1A1A1A1A1A1A1A1A1A1A25;
-			productRefGroup = 1A1A1A1A1A1A1A1A1A1A1A27 /* Products */;
+			mainGroup = 4A0000002A2A2A2A2A2A2A00;
+			productRefGroup = 4A0000022A2A2A2A2A2A2A02;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1A1A1A1A1A1A1A1A1A1A1A29 /* nuts2pin */,
+				5A0000002A2A2A2A2A2A2A00 /* nuts2pin */,
 			);
 		};
 		/* End PBXProject section */
 
 		/* Begin PBXResourcesBuildPhase section */
-		1A1A1A1A1A1A1A1A1A1A1A2C /* Resources */ = {
+		5A0000042A2A2A2A2A2A2A04 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A1A1A1A1A1A1A1A1A1A1A20 /* Preview Assets.xcassets in Resources */,
-				1A1A1A1A1A1A1A1A1A1A1A1E /* Assets.xcassets in Resources */,
+				2A0000152A2A2A2A2A2A2A15 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		/* End PBXResourcesBuildPhase section */
 
 		/* Begin PBXSourcesBuildPhase section */
-		1A1A1A1A1A1A1A1A1A1A1A2B /* Sources */ = {
+		5A0000022A2A2A2A2A2A2A02 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A1A1A1A1A1A1A1A1A1A1A1C /* ContentView.swift in Sources */,
-				1A1A1A1A1A1A1A1A1A1A1A1A /* nuts2pinApp.swift in Sources */,
-				1A1A1A1A1A1A1A1A1A1A1A2E /* CourseViewModel.swift in Sources */,
+				2A0000012A2A2A2A2A2A2A01 /* Nuts2PinApp.swift in Sources */,
+				2A0000022A2A2A2A2A2A2A02 /* ContentView.swift in Sources */,
+				2A0000032A2A2A2A2A2A2A03 /* CourseSelectionView.swift in Sources */,
+				2A0000042A2A2A2A2A2A2A04 /* CourseView.swift in Sources */,
+				2A0000052A2A2A2A2A2A2A05 /* InteractiveCourseMapView.swift in Sources */,
+				2A0000062A2A2A2A2A2A2A06 /* ScoreInputView.swift in Sources */,
+				2A0000072A2A2A2A2A2A2A07 /* ScoringView.swift in Sources */,
+				2A0000082A2A2A2A2A2A2A08 /* SplashScreenView.swift in Sources */,
+				2A0000092A2A2A2A2A2A2A09 /* TeeBoxSelectionView.swift in Sources */,
+				2A0000102A2A2A2A2A2A2A10 /* Course.swift in Sources */,
+				2A0000112A2A2A2A2A2A2A11 /* TeeBox.swift in Sources */,
+				2A0000122A2A2A2A2A2A2A12 /* LocationManager.swift in Sources */,
+				2A0000132A2A2A2A2A2A2A13 /* SampleCourses.swift in Sources */,
+				2A0000142A2A2A2A2A2A2A14 /* CourseViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		/* End PBXSourcesBuildPhase section */
 
 		/* Begin XCBuildConfiguration section */
-		1A1A1A1A1A1A1A1A1A1A1A2F /* Debug */ = {
+		7A0000002A2A2A2A2A2A2A00 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -187,8 +247,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -203,21 +262,19 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		1A1A1A1A1A1A1A1A1A1A1A30 /* Release */ = {
+		7A0000012A2A2A2A2A2A2A01 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -250,8 +307,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -260,7 +316,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -270,7 +325,7 @@
 			};
 			name = Release;
 		};
-		1A1A1A1A1A1A1A1A1A1A1A31 /* Debug */ = {
+		7A0000022A2A2A2A2A2A2A02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -281,17 +336,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = nuts2pin/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.geoffreyfylak.nuts2pin;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nuts2pin.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -299,7 +351,7 @@
 			};
 			name = Debug;
 		};
-		1A1A1A1A1A1A1A1A1A1A1A32 /* Release */ = {
+		7A0000032A2A2A2A2A2A2A03 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -310,17 +362,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = nuts2pin/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.geoffreyfylak.nuts2pin;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nuts2pin.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -331,25 +380,26 @@
 		/* End XCBuildConfiguration section */
 
 		/* Begin XCConfigurationList section */
-		1A1A1A1A1A1A1A1A1A1A1A2E /* Build configuration list for PBXProject "nuts2pin" */ = {
+		5A0000012A2A2A2A2A2A2A01 /* Build configuration list for PBXNativeTarget "nuts2pin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1A1A1A1A1A1A1A1A1A1A1A2F /* Debug */,
-				1A1A1A1A1A1A1A1A1A1A1A30 /* Release */,
+				7A0000022A2A2A2A2A2A2A02 /* Debug */,
+				7A0000032A2A2A2A2A2A2A03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1A1A1A1A1A1A1A1A1A1A1A2A /* Build configuration list for PBXNativeTarget "nuts2pin" */ = {
+		6A0000012A2A2A2A2A2A2A01 /* Build configuration list for PBXProject "nuts2pin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1A1A1A1A1A1A1A1A1A1A1A31 /* Debug */,
-				1A1A1A1A1A1A1A1A1A1A1A32 /* Release */,
+				7A0000002A2A2A2A2A2A2A00 /* Debug */,
+				7A0000012A2A2A2A2A2A2A01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		/* End XCConfigurationList section */
 	};
-	rootObject = 1A1A1A1A1A1A1A1A1A1A1A2D /* Project object */;
+	rootObject = 6A0000002A2A2A2A2A2A2A00 /* Project object */;
+} 
 } 
