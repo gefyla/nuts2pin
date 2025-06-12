@@ -1,0 +1,17 @@
+name: nuts2pin
+options:
+  bundleIdPrefix: com.nuts2pin
+  deploymentTarget:
+    iOS: "18.0"
+targets:
+  nuts2pin:
+    type: application
+    platform: iOS
+    sources: [nuts2pin]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.nuts2pin.app
+        SWIFT_VERSION: 5.0
+        TARGETED_DEVICE_FAMILY: "1,2"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: YES 

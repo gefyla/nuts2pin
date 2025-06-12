@@ -17,9 +17,15 @@ jobs:
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_16.0.app
 
+    - name: Install XcodeGen
+      run: brew install xcodegen
+
+    - name: Generate Xcode Project
+      run: xcodegen generate
+
     - name: Build
       run: |
-        xcodebuild clean build -verbose -project nuts2pin.xcodeproj -scheme nuts2pin -configuration Release -sdk iphoneos CODE_SIGN_IDENTITY="Apple Development" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO IPHONEOS_DEPLOYMENT_TARGET=18.0
+        xcodebuild clean build -project nuts2pin.xcodeproj -scheme nuts2pin -configuration Release -sdk iphoneos CODE_SIGN_IDENTITY="Apple Development" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO IPHONEOS_DEPLOYMENT_TARGET=18.0
 
     - name: Create IPA
       run: |

@@ -1,0 +1,16 @@
+# Xcode
+.DS_Store
+/build/
+/Packages/
+/*.xcodeproj
+xcuserdata/
+*.xcworkspace
+*.xccheckout
+*.moved-aside
+
+# Swift
+.swiftpm/
+DerivedData/
+
+# Generated
+nuts2pin.xcodeproj/ 
