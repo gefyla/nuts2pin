@@ -1,206 +1,136 @@
 import SwiftUI
 
 struct ScoringView: View {
-    @ObservedObject var viewModel: CourseViewModel
+    @EnvironmentObject var viewModel: CourseViewModel
     @State private var showingScoreInput = false
-    @State private var currentScore: Int?
+    @State private var selectedHole: Hole?
     
     var body: some View {
         NavigationView {
-            if let course = viewModel.currentCourse {
-                VStack {
-                    // Current Hole Score Input
-                    if let hole = viewModel.currentHole {
-                        VStack(spacing: 20) {
-                            Text("Hole \(hole.number)")
-                                .font(.title)
-                            
-                            HStack(spacing: 30) {
-                                VStack {
-                                    Text("Par")
-                                        .font(.headline)
-                                    Text("\(hole.par)")
-                                        .font(.title)
-                                }
-                                
-                                VStack {
-                                    Text("Distance")
-                                        .font(.headline)
-                                    Text("\(hole.distance) yds")
-                                        .font(.title)
-                                }
-                                
-                                VStack {
-                                    Text("Score")
-                                        .font(.headline)
-                                    if let score = hole.score {
-                                        Text("\(score)")
-                                            .font(.title)
-                                    } else {
-                                        Button(action: { showingScoreInput = true }) {
-                                            Text("Enter")
-                                                .font(.headline)
-                                                .foregroundColor(.white)
-                                                .padding()
-                                                .background(Color.blue)
-                                                .cornerRadius(10)
-                                        }
-                                    }
-                                }
-                            }
-                            .padding()
-                        }
-                        .padding()
+            VStack {
+                if let course = viewModel.currentCourse {
+                    // Scorecard Header
+                    HStack {
+                        Text(course.name)
+                            .font(.title)
+                        Spacer()
+                        Text("Total: \(viewModel.totalScore)")
+                            .font(.title2)
                     }
+                    .padding()
                     
                     // Scorecard
-                    ScorecardView(course: course)
-                        .padding()
-                }
-                .navigationTitle("Scorecard")
-                .sheet(isPresented: $showingScoreInput) {
-                    ScoreInputView(viewModel: viewModel)
-                }
-            } else {
-                Text("Select a course to view scorecard")
-                    .font(.title2)
-                    .foregroundColor(.secondary)
-            }
-        }
-    }
-}
-
-struct ScorecardView: View {
-    let course: Course
-    
-    var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                // Header
-                HStack {
-                    Text("Hole")
-                        .frame(width: 40)
-                    ForEach(1...9) { hole in
-                        Text("\(hole)")
-                            .frame(maxWidth: .infinity)
-                    }
-                }
-                .font(.headline)
-                .padding(.vertical, 8)
-                .background(Color.gray.opacity(0.2))
-                
-                // Par Row
-                HStack {
-                    Text("Par")
-                        .frame(width: 40)
-                    ForEach(1...9) { hole in
-                        if let holeData = course.holes.first(where: { $0.number == hole }) {
-                            Text("\(holeData.par)")
-                                .frame(maxWidth: .infinity)
-                        } else {
-                            Text("-")
-                                .frame(maxWidth: .infinity)
-                        }
-                    }
-                }
-                .padding(.vertical, 8)
-                
-                // Distance Row
-                HStack {
-                    Text("Yards")
-                        .frame(width: 40)
-                    ForEach(1...9) { hole in
-                        if let holeData = course.holes.first(where: { $0.number == hole }) {
-                            Text("\(holeData.distance)")
-                                .frame(maxWidth: .infinity)
-                        } else {
-                            Text("-")
-                                .frame(maxWidth: .infinity)
-                        }
-                    }
-                }
-                .padding(.vertical, 8)
-                .background(Color.gray.opacity(0.1))
-                
-                // Score Row
-                HStack {
-                    Text("Score")
-                        .frame(width: 40)
-                    ForEach(1...9) { hole in
-                        if let holeData = course.holes.first(where: { $0.number == hole }) {
-                            if let score = holeData.score {
-                                Text("\(score)")
-                                    .frame(maxWidth: .infinity)
-                                    .foregroundColor(scoreColor(score: score, par: holeData.par))
-                            } else {
-                                Text("-")
-                                    .frame(maxWidth: .infinity)
+                    ScrollView {
+                        VStack(spacing: 0) {
+                            // Header Row
+                            HStack {
+                                Text("Hole")
+                                    .frame(width: 40)
+                                Text("Par")
+                                    .frame(width: 40)
+                                Text("Score")
+                                    .frame(width: 60)
+                                Text("+/-")
+                                    .frame(width: 40)
                             }
-                        } else {
-                            Text("-")
-                                .frame(maxWidth: .infinity)
-                        }
-                    }
-                }
-                .padding(.vertical, 8)
-                
-                // Totals
-                VStack(spacing: 0) {
-                    Divider()
-                    
-                    // Front 9 Totals
-                    HStack {
-                        Text("Out")
-                            .frame(width: 40)
-                        ForEach(1...9) { hole in
-                            if let holeData = course.holes.first(where: { $0.number == hole }) {
-                                if let score = holeData.score {
-                                    Text("\(score)")
-                                        .frame(maxWidth: .infinity)
-                                } else {
-                                    Text("-")
-                                        .frame(maxWidth: .infinity)
+                            .font(.headline)
+                            .padding(.vertical, 8)
+                            .background(Color.gray.opacity(0.2))
+                            
+                            // Hole Rows
+                            ForEach(course.holes) { hole in
+                                Button(action: {
+                                    selectedHole = hole
+                                    showingScoreInput = true
+                                }) {
+                                    HStack {
+                                        Text("\(hole.number)")
+                                            .frame(width: 40)
+                                        Text("\(hole.par)")
+                                            .frame(width: 40)
+                                        Text(hole.score.map(String.init) ?? "-")
+                                            .frame(width: 60)
+                                        Text(scoreToPar(hole))
+                                            .frame(width: 40)
+                                            .foregroundColor(scoreColor(hole))
+                                    }
+                                    .padding(.vertical, 8)
                                 }
-                            } else {
-                                Text("-")
-                                    .frame(maxWidth: .infinity)
+                                .buttonStyle(PlainButtonStyle())
+                                
+                                if hole.number != course.holes.count {
+                                    Divider()
+                                }
                             }
+                            
+                            // Totals Row
+                            Divider()
+                                .padding(.vertical, 8)
+                            
+                            HStack {
+                                Text("Total")
+                                    .frame(width: 40)
+                                Text("\(course.totalPar)")
+                                    .frame(width: 40)
+                                Text("\(viewModel.totalScore)")
+                                    .frame(width: 60)
+                                Text("\(viewModel.scoreToPar)")
+                                    .frame(width: 40)
+                                    .foregroundColor(scoreColor(viewModel.scoreToPar))
+                            }
+                            .font(.headline)
+                            .padding(.vertical, 8)
                         }
+                        .padding()
                     }
-                    .padding(.vertical, 8)
-                    .background(Color.gray.opacity(0.2))
-                    
-                    // Total Score
-                    HStack {
-                        Text("Total")
-                            .frame(width: 40)
-                            .font(.headline)
-                        Text("\(totalScore)")
-                            .frame(maxWidth: .infinity)
-                            .font(.headline)
+                } else {
+                    // No Course Selected
+                    VStack(spacing: 20) {
+                        Image(systemName: "list.bullet.clipboard")
+                            .font(.system(size: 80))
+                            .foregroundColor(.blue)
+                        
+                        Text("No Course Selected")
+                            .font(.title)
+                        
+                        Text("Select a course to view your scorecard")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
                     }
-                    .padding(.vertical, 8)
-                    .background(Color.gray.opacity(0.1))
                 }
             }
-            .padding()
-            .background(Color.white)
-            .cornerRadius(10)
-            .shadow(radius: 2)
+            .navigationTitle("Scorecard")
+        }
+        .sheet(isPresented: $showingScoreInput) {
+            if let hole = selectedHole {
+                ScoreInputView(hole: hole) { score in
+                    viewModel.updateScore(for: hole, score: score)
+                }
+            }
         }
     }
     
-    private var totalScore: Int {
-        course.holes.compactMap { $0.score }.reduce(0, +)
+    private func scoreToPar(_ hole: Hole) -> String {
+        guard let score = hole.score else { return "-" }
+        let diff = score - hole.par
+        return diff > 0 ? "+\(diff)" : "\(diff)"
     }
     
-    private func scoreColor(score: Int, par: Int) -> Color {
-        if score < par {
-            return .green
-        } else if score > par {
-            return .red
-        } else {
-            return .primary
+    private func scoreColor(_ hole: Hole) -> Color {
+        guard let score = hole.score else { return .primary }
+        let diff = score - hole.par
+        switch diff {
+        case ..<0: return .green
+        case 0: return .blue
+        default: return .red
+        }
+    }
+    
+    private func scoreColor(_ score: Int) -> Color {
+        switch score {
+        case ..<0: return .green
+        case 0: return .blue
+        default: return .red
         }
     }
 }

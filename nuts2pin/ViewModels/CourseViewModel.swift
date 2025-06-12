@@ -65,31 +65,44 @@ class CourseViewModel: ObservableObject {
     func nextHole() {
         guard let course = currentCourse,
               let currentHole = currentHole,
-              let currentIndex = course.holes.firstIndex(where: { $0.number == currentHole.number }),
+              let currentIndex = course.holes.firstIndex(where: { $0.id == currentHole.id }),
               currentIndex + 1 < course.holes.count else { return }
+        
         self.currentHole = course.holes[currentIndex + 1]
     }
     
     func previousHole() {
         guard let course = currentCourse,
               let currentHole = currentHole,
-              let currentIndex = course.holes.firstIndex(where: { $0.number == currentHole.number }),
+              let currentIndex = course.holes.firstIndex(where: { $0.id == currentHole.id }),
               currentIndex > 0 else { return }
+        
         self.currentHole = course.holes[currentIndex - 1]
     }
     
-    func recordShot() {
+    func recordShot(club: String, distance: Double, notes: String? = nil) {
         guard var hole = currentHole else { return }
-        hole.shots.append(Shot())
-        updateScores()
+        let shot = Shot(club: club, distance: distance, notes: notes)
+        hole.shots.append(shot)
+        currentHole = hole
+        
+        if let course = currentCourse,
+           let index = course.holes.firstIndex(where: { $0.id == hole.id }) {
+            currentCourse?.holes[index] = hole
+        }
     }
     
     func updateScore(for hole: Hole, score: Int) {
-        guard var course = currentCourse,
-              let index = course.holes.firstIndex(where: { $0.number == hole.number }) else { return }
-        course.holes[index].score = score
-        currentCourse = course
-        updateScores()
+        guard let course = currentCourse,
+              let index = course.holes.firstIndex(where: { $0.id == hole.id }) else { return }
+        
+        var updatedHole = hole
+        updatedHole.score = score
+        currentCourse?.holes[index] = updatedHole
+        
+        if currentHole?.id == hole.id {
+            currentHole = updatedHole
+        }
     }
     
     private func updateScores() {
@@ -208,5 +221,9 @@ class CourseViewModel: ObservableObject {
         if let location = locationManager.location {
             updateDistances(with: location)
         }
+    }
+    
+    func updateUserLocation(_ location: CLLocation) {
+        userLocation = location.coordinate
     }
 } 

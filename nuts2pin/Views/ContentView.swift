@@ -1,103 +1,92 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var viewModel: CourseViewModel
+    @StateObject private var viewModel = CourseViewModel()
+    @StateObject private var locationManager = LocationManager()
     @State private var selectedTab = 0
     
     var body: some View {
         TabView(selection: $selectedTab) {
             CourseView()
                 .tabItem {
-                    Image(systemName: "map")
-                    Text("Course")
+                    Label("Course", systemImage: "map")
                 }
                 .tag(0)
             
             ScoringView()
                 .tabItem {
-                    Image(systemName: "list.bullet.clipboard")
-                    Text("Scorecard")
+                    Label("Scorecard", systemImage: "list.bullet.clipboard")
                 }
                 .tag(1)
             
             SettingsView()
                 .tabItem {
-                    Image(systemName: "gear")
-                    Text("Settings")
+                    Label("Settings", systemImage: "gear")
                 }
                 .tag(2)
         }
-        .accentColor(.blue)
+        .environmentObject(viewModel)
+        .environmentObject(locationManager)
     }
 }
 
 struct SettingsView: View {
     @EnvironmentObject var viewModel: CourseViewModel
-    @State private var showingAbout = false
+    @State private var showingTeeBoxSelection = false
     
     var body: some View {
         NavigationView {
             List {
                 Section(header: Text("App Settings")) {
-                    Toggle("Practice Mode", isOn: $viewModel.isPracticeMode)
+                    Toggle("Realistic Map Style", isOn: $viewModel.isMapRealistic)
                     
-                    NavigationLink(destination: TeeBoxSelectionView(viewModel: viewModel)) {
+                    Button(action: { showingTeeBoxSelection = true }) {
                         HStack {
                             Text("Default Tee Box")
                             Spacer()
-                            Text(viewModel.currentCourse?.selectedTeeBox.rawValue ?? "White")
+                            Text(viewModel.selectedTeeBox)
                                 .foregroundColor(.gray)
                         }
                     }
                 }
                 
                 Section(header: Text("About")) {
-                    Button("About Nuts2Pin") {
-                        showingAbout = true
+                    NavigationLink(destination: AboutView()) {
+                        Text("About Nuts2Pin")
                     }
-                    
-                    Link("Rate the App", destination: URL(string: "https://apps.apple.com")!)
                 }
             }
             .navigationTitle("Settings")
-            .sheet(isPresented: $showingAbout) {
-                AboutView()
-            }
+        }
+        .sheet(isPresented: $showingTeeBoxSelection) {
+            TeeBoxSelectionView(selectedTeeBox: $viewModel.selectedTeeBox)
         }
     }
 }
 
 struct AboutView: View {
     var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                Image(systemName: "figure.golf")
-                    .font(.system(size: 60))
-                    .foregroundColor(.blue)
-                
-                Text("Nuts2Pin")
-                    .font(.title)
-                    .fontWeight(.bold)
-                
-                Text("Version 1.0")
-                    .foregroundColor(.gray)
-                
-                Text("Your Personal Golf Companion")
-                    .font(.headline)
-                    .multilineTextAlignment(.center)
-                    .padding()
-                
-                Text("Nuts2Pin helps you track your golf game with precision. Measure distances, record scores, and improve your game with our comprehensive golf companion app.")
-                    .multilineTextAlignment(.center)
-                    .padding()
-                
-                Spacer()
-            }
-            .padding()
-            .navigationBarItems(trailing: Button("Done") {
-                // Dismiss the sheet
-            })
+        VStack(spacing: 20) {
+            Image(systemName: "figure.golf")
+                .font(.system(size: 80))
+                .foregroundColor(.blue)
+            
+            Text("Nuts2Pin")
+                .font(.title)
+            
+            Text("Version 1.0")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+            
+            Text("Your personal golf companion")
+                .font(.headline)
+                .multilineTextAlignment(.center)
+                .padding()
+            
+            Spacer()
         }
+        .padding()
+        .navigationTitle("About")
     }
 }
 

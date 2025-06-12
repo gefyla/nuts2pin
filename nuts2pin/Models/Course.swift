@@ -1,15 +1,20 @@
 import Foundation
 import CoreLocation
 import SwiftUI
+import MapKit
 
 struct Course: Identifiable {
     let id = UUID()
     let name: String
     let holes: [Hole]
-    var selectedTeeBox: TeeBox = .white
+    var selectedTeeBox: String = "White"
     
     var totalPar: Int {
         holes.reduce(0) { $0 + $1.par }
+    }
+    
+    var totalDistance: Int {
+        holes.reduce(0) { $0 + $1.distance }
     }
 }
 
@@ -18,11 +23,14 @@ struct Hole: Identifiable {
     let number: Int
     let par: Int
     let distance: Int
-    let teeBoxes: [TeeBox: TeeBoxInfo]
+    let teeLocation: Coordinate
     let pinLocation: Coordinate
-    var customPinLocation: Coordinate?
     let hazards: [Hazard]
+    var score: Int?
     var shots: [Shot] = []
+    var customPinLocation: Coordinate?
+    
+    var teeBoxes: [String: TeeBoxInfo] = [:]
 }
 
 struct TeeBoxInfo {
@@ -55,14 +63,14 @@ struct Coordinate {
     let latitude: Double
     let longitude: Double
     
-    var clLocation: CLLocationCoordinate2D {
+    var clCoordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
-    static func distance(from start: Coordinate, to end: Coordinate) -> Double {
-        let startLocation = CLLocation(latitude: start.latitude, longitude: start.longitude)
-        let endLocation = CLLocation(latitude: end.latitude, longitude: end.longitude)
-        return startLocation.distance(from: endLocation) * 1.09361 // Convert meters to yards
+    static func distance(from: Coordinate, to: Coordinate) -> Double {
+        let fromLocation = CLLocation(latitude: from.latitude, longitude: from.longitude)
+        let toLocation = CLLocation(latitude: to.latitude, longitude: to.longitude)
+        return fromLocation.distance(from: toLocation)
     }
 }
 
@@ -74,20 +82,18 @@ struct Hazard: Identifiable {
 }
 
 enum HazardType: String {
-    case bunker = "Bunker"
     case water = "Water"
+    case bunker = "Bunker"
     case outOfBounds = "Out of Bounds"
     case tree = "Tree"
-    case rough = "Rough"
 }
 
-struct Shot: Identifiable {
+struct Shot {
     let id = UUID()
-    let club: Club
-    let startLocation: Coordinate
-    let endLocation: Coordinate
-    let distance: Double
-    let timestamp: Date = Date()
+    let timestamp = Date()
+    var distance: Double?
+    var club: String?
+    var notes: String?
 }
 
 enum Club: String, CaseIterable {
