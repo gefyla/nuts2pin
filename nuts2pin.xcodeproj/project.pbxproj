@@ -5,7 +5,8 @@
 	};
 	objectVersion = 56;
 	objects = {
-		/* Begin PBXBuildFile section */
+
+/* --- PBXBuildFile section --- */
 		2A0000012A2A2A2A2A2A2A01 /* Nuts2PinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000012A2A2A2A2A2A2A01 /* Nuts2PinApp.swift */; };
 		2A0000022A2A2A2A2A2A2A02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000022A2A2A2A2A2A2A02 /* ContentView.swift */; };
 		2A0000032A2A2A2A2A2A2A03 /* CourseSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000032A2A2A2A2A2A2A03 /* CourseSelectionView.swift */; };
@@ -21,9 +22,9 @@
 		2A0000132A2A2A2A2A2A2A13 /* SampleCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000132A2A2A2A2A2A2A13 /* SampleCourses.swift */; };
 		2A0000142A2A2A2A2A2A2A14 /* CourseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0000142A2A2A2A2A2A2A14 /* CourseViewModel.swift */; };
 		2A0000152A2A2A2A2A2A2A15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A0000152A2A2A2A2A2A2A15 /* Assets.xcassets */; };
-		/* End PBXBuildFile section */
 
-		/* Begin PBXFileReference section */
+
+/* --- PBXFileReference section --- */
 		3A0000012A2A2A2A2A2A2A01 /* Nuts2PinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nuts2PinApp.swift; sourceTree = "<group>"; };
 		3A0000022A2A2A2A2A2A2A02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/ContentView.swift; sourceTree = "<group>"; };
 		3A0000032A2A2A2A2A2A2A03 /* CourseSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/CourseSelectionView.swift; sourceTree = "<group>"; };
@@ -40,19 +41,9 @@
 		3A0000142A2A2A2A2A2A2A14 /* CourseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.xcassets/CourseViewModel.swift; sourceTree = "<group>"; };
 		3A0000152A2A2A2A2A2A2A15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A0000162A2A2A2A2A2A2A16 /* nuts2pin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nuts2pin.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		/* End PBXFileReference section */
 
-		/* Begin PBXFrameworksBuildPhase section */
-		5A0000032A2A2A2A2A2A2A03 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		/* End PBXFrameworksBuildPhase section */
 
-		/* Begin PBXGroup section */
+/* --- PBXGroup section --- */
 		4A0000002A2A2A2A2A2A2A00 /* Main group */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,9 +113,9 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		/* End PBXGroup section */
 
-		/* Begin PBXNativeTarget section */
+
+/* --- PBXNativeTarget section --- */
 		5A0000002A2A2A2A2A2A2A00 /* nuts2pin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5A0000012A2A2A2A2A2A2A01 /* Build configuration list for PBXNativeTarget "nuts2pin" */;
@@ -142,9 +133,9 @@
 			productReference = 3A0000162A2A2A2A2A2A2A16 /* nuts2pin.app */;
 			productType = "com.apple.product-type.application";
 		};
-		/* End PBXNativeTarget section */
 
-		/* Begin PBXProject section */
+
+/* --- PBXProject section --- */
 		6A0000002A2A2A2A2A2A2A00 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
@@ -173,20 +164,9 @@
 				5A0000002A2A2A2A2A2A2A00 /* nuts2pin */,
 			);
 		};
-		/* End PBXProject section */
 
-		/* Begin PBXResourcesBuildPhase section */
-		5A0000042A2A2A2A2A2A2A04 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2A0000152A2A2A2A2A2A2A15 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		/* End PBXResourcesBuildPhase section */
 
-		/* Begin PBXSourcesBuildPhase section */
+/* --- PBXSourcesBuildPhase section --- */
 		5A0000022A2A2A2A2A2A2A02 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -208,9 +188,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		/* End PBXSourcesBuildPhase section */
 
-		/* Begin XCBuildConfiguration section */
+/* --- PBXFrameworksBuildPhase section --- */
+		5A0000032A2A2A2A2A2A2A03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+
+/* --- PBXResourcesBuildPhase section --- */
+		5A0000042A2A2A2A2A2A2A04 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A0000152A2A2A2A2A2A2A15 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+
+
+/* --- XCBuildConfiguration section --- */
 		7A0000002A2A2A2A2A2A2A00 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -377,9 +376,9 @@
 			};
 			name = Release;
 		};
-		/* End XCBuildConfiguration section */
 
-		/* Begin XCConfigurationList section */
+
+/* --- XCConfigurationList section --- */
 		5A0000012A2A2A2A2A2A2A01 /* Build configuration list for PBXNativeTarget "nuts2pin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -398,8 +397,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		/* End XCConfigurationList section */
 	};
 	rootObject = 6A0000002A2A2A2A2A2A2A00 /* Project object */;
-} 
 } 

@@ -19,7 +19,7 @@ jobs:
 
     - name: Build
       run: |
-        xcodebuild clean build -project nuts2pin.xcodeproj -scheme nuts2pin -configuration Release -sdk iphoneos CODE_SIGN_IDENTITY="Apple Development" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO IPHONEOS_DEPLOYMENT_TARGET=18.0
+        xcodebuild clean build -verbose -project nuts2pin.xcodeproj -scheme nuts2pin -configuration Release -sdk iphoneos CODE_SIGN_IDENTITY="Apple Development" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO IPHONEOS_DEPLOYMENT_TARGET=18.0
 
     - name: Create IPA
       run: |
