@@ -1,15 +1,13 @@
 import SwiftUI
 
 @main
-struct Nuts2PinApp: App {
-    @StateObject private var viewModel = CourseViewModel()
-    @StateObject private var locationManager = LocationManager()
+struct nuts2pinApp: App {
+    // @StateObject private var viewModel = CourseViewModel() // Temporarily commented out
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(viewModel)
-                .environmentObject(locationManager)
+                // .environmentObject(viewModel) // Temporarily commented out
         }
     }
 } 
