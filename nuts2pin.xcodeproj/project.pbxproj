@@ -12,9 +12,9 @@
 		2A0000032A2A2A2A2A2A2A03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A0000032A2A2A2A2A2A2A03 /* Assets.xcassets */; };
 
 /* --- PBXFileReference section --- */
-		3A0000012A2A2A2A2A2A2A01 /* Nuts2PinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nuts2PinApp.swift; sourceTree = "<group>"; };
-		3A0000022A2A2A2A2A2A2A02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/ContentView.swift; sourceTree = "<group>"; };
-		3A0000032A2A2A2A2A2A2A03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3A0000012A2A2A2A2A2A2A01 /* Nuts2PinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "nuts2pin/Nuts2PinApp.swift"; sourceTree = "<group>"; };
+		3A0000022A2A2A2A2A2A2A02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "nuts2pin/Views/ContentView.swift"; sourceTree = "<group>"; };
+		3A0000032A2A2A2A2A2A2A03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "nuts2pin/Assets.xcassets"; sourceTree = "<group>"; };
 		3A0000042A2A2A2A2A2A2A04 /* nuts2pin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nuts2pin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 
 /* --- PBXGroup section --- */
@@ -33,7 +33,7 @@
 				3A0000022A2A2A2A2A2A2A02 /* ContentView.swift */,
 				3A0000032A2A2A2A2A2A2A03 /* Assets.xcassets */,
 			);
-			path = nuts2pin;
+			path = "";
 			sourceTree = "<group>";
 		};
 		4A0000022A2A2A2A2A2A2A02 /* Products */ = {
