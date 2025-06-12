@@ -7,9 +7,9 @@ import MapKit
 class CourseViewModel: ObservableObject {
     @Published var currentCourse: Course?
     @Published var currentHole: Hole?
-    @Published var selectedTeeBox: String = "White"
+    @Published var selectedTeeBox: TeeBox = .blue
     @Published var customPinLocation: CLLocationCoordinate2D?
-    @Published var userLocation: CLLocationCoordinate2D?
+    @Published var userLocation: CLLocation?
     @Published var isMapRealistic: Bool = true
     @Published var totalScore: Int = 0
     @Published var frontNineScore: Int = 0
@@ -22,6 +22,12 @@ class CourseViewModel: ObservableObject {
     
     private var locationManager = CLLocationManager()
     private var cancellables = Set<AnyCancellable>()
+    
+    private var scores: [Int: Int] = [:]
+    private var putts: [Int: Int] = [:]
+    private var fairwayHits: [Int: Bool] = [:]
+    private var greenInRegulations: [Int: Bool] = [:]
+    private var notes: [Int: String] = [:]
     
     var scoreToPar: Int {
         guard let course = currentCourse else { return 0 }
@@ -92,35 +98,139 @@ class CourseViewModel: ObservableObject {
         }
     }
     
+    func getScore(for hole: Hole) -> Int? {
+        return scores[hole.number]
+    }
+    
+    func getPutts(for hole: Hole) -> Int? {
+        return putts[hole.number]
+    }
+    
+    func getFairwayHit(for hole: Hole) -> Bool? {
+        return fairwayHits[hole.number]
+    }
+    
+    func getGreenInRegulation(for hole: Hole) -> Bool? {
+        return greenInRegulations[hole.number]
+    }
+    
+    func getNotes(for hole: Hole) -> String? {
+        return notes[hole.number]
+    }
+    
     func updateScore(for hole: Hole, score: Int) {
-        guard let course = currentCourse,
-              let index = course.holes.firstIndex(where: { $0.id == hole.id }) else { return }
+        scores[hole.number] = score
+        objectWillChange.send()
+    }
+    
+    func updatePutts(for hole: Hole, putts: Int) {
+        self.putts[hole.number] = putts
+        objectWillChange.send()
+    }
+    
+    func updateFairwayHit(for hole: Hole, hit: Bool) {
+        fairwayHits[hole.number] = hit
+        objectWillChange.send()
+    }
+    
+    func updateGreenInRegulation(for hole: Hole, hit: Bool) {
+        greenInRegulations[hole.number] = hit
+        objectWillChange.send()
+    }
+    
+    func updateNotes(for hole: Hole, notes: String) {
+        self.notes[hole.number] = notes
+        objectWillChange.send()
+    }
+    
+    func getTotalScore(frontNine: Bool = false, backNine: Bool = false) -> Int {
+        guard let course = currentCourse else { return 0 }
         
-        var updatedHole = hole
-        updatedHole.score = score
-        currentCourse?.holes[index] = updatedHole
-        
-        if currentHole?.id == hole.id {
-            currentHole = updatedHole
+        if frontNine {
+            return course.holes.prefix(9).compactMap { scores[$0.number] }.reduce(0, +)
+        } else if backNine {
+            return course.holes.suffix(9).compactMap { scores[$0.number] }.reduce(0, +)
+        } else {
+            return scores.values.reduce(0, +)
         }
     }
     
-    private func updateScores() {
-        guard let course = currentCourse else { return }
+    func getTotalPar(frontNine: Bool = false, backNine: Bool = false) -> Int {
+        guard let course = currentCourse else { return 0 }
         
-        // Calculate front nine score
-        frontNineScore = course.holes.prefix(9).compactMap { $0.score }.reduce(0, +)
+        if frontNine {
+            return course.frontNinePar
+        } else if backNine {
+            return course.backNinePar
+        } else {
+            return course.totalPar
+        }
+    }
+    
+    func getScoreToPar(frontNine: Bool = false, backNine: Bool = false) -> Int {
+        getTotalScore(frontNine: frontNine, backNine: backNine) - getTotalPar(frontNine: frontNine, backNine: backNine)
+    }
+    
+    func getTotalPutts(frontNine: Bool = false, backNine: Bool = false) -> Int {
+        guard let course = currentCourse else { return 0 }
         
-        // Calculate back nine score
-        backNineScore = course.holes.suffix(9).compactMap { $0.score }.reduce(0, +)
+        if frontNine {
+            return course.holes.prefix(9).compactMap { putts[$0.number] }.reduce(0, +)
+        } else if backNine {
+            return course.holes.suffix(9).compactMap { putts[$0.number] }.reduce(0, +)
+        } else {
+            return putts.values.reduce(0, +)
+        }
+    }
+    
+    func getFairwayHitPercentage(frontNine: Bool = false, backNine: Bool = false) -> Double {
+        guard let course = currentCourse else { return 0 }
         
-        // Calculate total score
-        totalScore = frontNineScore + backNineScore
+        let holes = frontNine ? course.holes.prefix(9) : backNine ? course.holes.suffix(9) : course.holes
+        let hits = holes.compactMap { fairwayHits[$0.number] }.filter { $0 }.count
+        let total = holes.compactMap { fairwayHits[$0.number] }.count
+        return total > 0 ? Double(hits) / Double(total) * 100 : 0
+    }
+    
+    func getGreenInRegulationPercentage(frontNine: Bool = false, backNine: Bool = false) -> Double {
+        guard let course = currentCourse else { return 0 }
+        
+        let holes = frontNine ? course.holes.prefix(9) : backNine ? course.holes.suffix(9) : course.holes
+        let hits = holes.compactMap { greenInRegulations[$0.number] }.filter { $0 }.count
+        let total = holes.compactMap { greenInRegulations[$0.number] }.count
+        return total > 0 ? Double(hits) / Double(total) * 100 : 0
+    }
+    
+    func moveToNextHole() {
+        guard let course = currentCourse,
+              let currentHole = currentHole,
+              let currentIndex = course.holes.firstIndex(where: { $0.number == currentHole.number }),
+              currentIndex + 1 < course.holes.count else {
+            return
+        }
+        self.currentHole = course.holes[currentIndex + 1]
+    }
+    
+    func moveToPreviousHole() {
+        guard let course = currentCourse,
+              let currentHole = currentHole,
+              let currentIndex = course.holes.firstIndex(where: { $0.number == currentHole.number }),
+              currentIndex > 0 else {
+            return
+        }
+        self.currentHole = course.holes[currentIndex - 1]
+    }
+    
+    func updateUserLocation(_ location: CLLocation) {
+        userLocation = location
+    }
+    
+    func toggleMapRealism() {
+        isMapRealistic.toggle()
     }
     
     func selectTeeBox(_ teeBox: TeeBox) {
-        currentCourse?.selectedTeeBox = teeBox
-        updateDistances()
+        selectedTeeBox = teeBox
     }
     
     func updatePinLocation(hole: Hole, newLocation: CLLocationCoordinate2D) {
@@ -192,8 +302,8 @@ class CourseViewModel: ObservableObject {
             currentLocation = practiceLocation ?? teeBox.location
         } else if let userLocation = userLocation {
             currentLocation = Coordinate(
-                latitude: userLocation.latitude,
-                longitude: userLocation.longitude
+                latitude: userLocation.coordinate.latitude,
+                longitude: userLocation.coordinate.longitude
             )
         } else {
             currentLocation = teeBox.location
@@ -210,7 +320,7 @@ class CourseViewModel: ObservableObject {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        userLocation = locations.last?.coordinate
+        userLocation = locations.last
         if !isPracticeMode {
             updateDistances()
         }
@@ -221,9 +331,5 @@ class CourseViewModel: ObservableObject {
         if let location = locationManager.location {
             updateDistances(with: location)
         }
-    }
-    
-    func updateUserLocation(_ location: CLLocation) {
-        userLocation = location.coordinate
     }
 } 

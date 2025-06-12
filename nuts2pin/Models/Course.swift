@@ -16,6 +16,22 @@ struct Course: Identifiable {
     var totalDistance: Int {
         holes.reduce(0) { $0 + $1.distance }
     }
+    
+    var frontNinePar: Int {
+        holes.prefix(9).reduce(0) { $0 + $1.par }
+    }
+    
+    var backNinePar: Int {
+        holes.suffix(9).reduce(0) { $0 + $1.par }
+    }
+    
+    var frontNineDistance: Int {
+        holes.prefix(9).reduce(0) { $0 + $1.distance }
+    }
+    
+    var backNineDistance: Int {
+        holes.suffix(9).reduce(0) { $0 + $1.distance }
+    }
 }
 
 struct Hole: Identifiable {
@@ -31,6 +47,18 @@ struct Hole: Identifiable {
     var customPinLocation: Coordinate?
     
     var teeBoxes: [String: TeeBoxInfo] = [:]
+    
+    var totalHazards: Int {
+        hazards.count
+    }
+    
+    var bunkerCount: Int {
+        hazards.filter { $0.type == .bunker }.count
+    }
+    
+    var waterCount: Int {
+        hazards.filter { $0.type == .water }.count
+    }
 }
 
 struct TeeBoxInfo {
@@ -67,6 +95,10 @@ struct Coordinate {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
+    var clLocation: CLLocation {
+        CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
     static func distance(from: Coordinate, to: Coordinate) -> Double {
         let fromLocation = CLLocation(latitude: from.latitude, longitude: from.longitude)
         let toLocation = CLLocation(latitude: to.latitude, longitude: to.longitude)
@@ -82,10 +114,12 @@ struct Hazard: Identifiable {
 }
 
 enum HazardType: String {
-    case water = "Water"
-    case bunker = "Bunker"
-    case outOfBounds = "Out of Bounds"
-    case tree = "Tree"
+    case bunker = "bunker"
+    case water = "water"
+    case outOfBounds = "outOfBounds"
+    case rough = "rough"
+    case fairway = "fairway"
+    case green = "green"
 }
 
 struct Shot {

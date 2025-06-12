@@ -10,6 +10,27 @@
 		1A1A1A1A1A1A1A1A1A1A1A1C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A1D /* ContentView.swift */; };
 		1A1A1A1A1A1A1A1A1A1A1A2E /* CourseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A2F /* CourseViewModel.swift */; };
 		1A1A1A1A1A1A1A1A1A1A1A30 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A31 /* SplashScreenView.swift */; };
+		1A1A1A1A1A1A1A1A1A1A1A32 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A33 /* Course.swift */; };
+		1A1A1A1A1A1A1A1A1A1A1A34 /* CourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A35 /* CourseView.swift */; };
+		1A1A1A1A1A1A1A1A1A1A1A36 /* ScoringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A37 /* ScoringView.swift */; };
+		1A1A1A1A1A1A1A1A1A1A1A38 /* CourseMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A39 /* CourseMapView.swift */; };
+		1A1A1A1A1A1A1A1A1A1A1A3A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A3B /* LocationManager.swift */; };
+		1A1A1A1A1A1A1A1A1A1A1A3C /* SampleCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1A1A1A1A1A1A1A1A1A1A3D /* SampleCourses.swift */; };
+		/* Models */
+		ABCDEF1234567890 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF1234567891 /* Course.swift */; };
+		ABCDEF1234567892 /* TeeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF1234567893 /* TeeBox.swift */; };
+		/* Views */
+		ABCDEF1234567894 /* CourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF1234567895 /* CourseView.swift */; };
+		ABCDEF1234567896 /* ScoringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF1234567897 /* ScoringView.swift */; };
+		ABCDEF1234567898 /* CourseMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF1234567899 /* CourseMapView.swift */; };
+		ABCDEF1234567900 /* TeeBoxSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF1234567901 /* TeeBoxSelectionView.swift */; };
+		ABCDEF1234567902 /* ScoreInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF1234567903 /* ScoreInputView.swift */; };
+		/* ViewModels */
+		ABCDEF1234567904 /* CourseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF1234567905 /* CourseViewModel.swift */; };
+		/* Managers */
+		ABCDEF1234567906 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF1234567907 /* LocationManager.swift */; };
+		/* Data */
+		ABCDEF1234567908 /* SampleCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDEF1234567909 /* SampleCourses.swift */; };
 		/* End PBXBuildFile section */
 
 		/* Begin PBXFileReference section */
@@ -18,6 +39,27 @@
 		1A1A1A1A1A1A1A1A1A1A1A1D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = Views/ContentView.swift; sourceTree = "<group>"; };
 		1A1A1A1A1A1A1A1A1A1A1A2F /* CourseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CourseViewModel.swift; path = ViewModels/CourseViewModel.swift; sourceTree = "<group>"; };
 		1A1A1A1A1A1A1A1A1A1A1A31 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SplashScreenView.swift; path = Views/SplashScreenView.swift; sourceTree = "<group>"; };
+		1A1A1A1A1A1A1A1A1A1A1A33 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Course.swift; path = Models/Course.swift; sourceTree = "<group>"; };
+		1A1A1A1A1A1A1A1A1A1A1A35 /* CourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CourseView.swift; path = Views/CourseView.swift; sourceTree = "<group>"; };
+		1A1A1A1A1A1A1A1A1A1A1A37 /* ScoringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScoringView.swift; path = Views/ScoringView.swift; sourceTree = "<group>"; };
+		1A1A1A1A1A1A1A1A1A1A1A39 /* CourseMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CourseMapView.swift; path = Views/CourseMapView.swift; sourceTree = "<group>"; };
+		1A1A1A1A1A1A1A1A1A1A1A3B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Managers/LocationManager.swift; sourceTree = "<group>"; };
+		1A1A1A1A1A1A1A1A1A1A1A3D /* SampleCourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SampleCourses.swift; path = Data/SampleCourses.swift; sourceTree = "<group>"; };
+		/* Models */
+		ABCDEF1234567891 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		ABCDEF1234567893 /* TeeBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeeBox.swift; sourceTree = "<group>"; };
+		/* Views */
+		ABCDEF1234567895 /* CourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseView.swift; sourceTree = "<group>"; };
+		ABCDEF1234567897 /* ScoringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoringView.swift; sourceTree = "<group>"; };
+		ABCDEF1234567899 /* CourseMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseMapView.swift; sourceTree = "<group>"; };
+		ABCDEF1234567901 /* TeeBoxSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeeBoxSelectionView.swift; sourceTree = "<group>"; };
+		ABCDEF1234567903 /* ScoreInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreInputView.swift; sourceTree = "<group>"; };
+		/* ViewModels */
+		ABCDEF1234567905 /* CourseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseViewModel.swift; sourceTree = "<group>"; };
+		/* Managers */
+		ABCDEF1234567907 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		/* Data */
+		ABCDEF1234567909 /* SampleCourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleCourses.swift; sourceTree = "<group>"; };
 		/* End PBXFileReference section */
 
 		/* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +96,65 @@
 				1A1A1A1A1A1A1A1A1A1A1A1D /* ContentView.swift */,
 				1A1A1A1A1A1A1A1A1A1A1A2F /* CourseViewModel.swift */,
 				1A1A1A1A1A1A1A1A1A1A1A31 /* SplashScreenView.swift */,
+				1A1A1A1A1A1A1A1A1A1A1A33 /* Course.swift */,
+				1A1A1A1A1A1A1A1A1A1A1A35 /* CourseView.swift */,
+				1A1A1A1A1A1A1A1A1A1A1A37 /* ScoringView.swift */,
+				1A1A1A1A1A1A1A1A1A1A1A39 /* CourseMapView.swift */,
+				1A1A1A1A1A1A1A1A1A1A1A3B /* LocationManager.swift */,
+				1A1A1A1A1A1A1A1A1A1A1A3D /* SampleCourses.swift */,
 				1A1A1A1A1A1A1A1A1A1A1A23 /* Assets.xcassets */,
 			);
 			path = nuts2pin;
+			sourceTree = "<group>";
+		};
+		/* Models */
+		ABCDEF1234567910 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ABCDEF1234567891 /* Course.swift */,
+				ABCDEF1234567893 /* TeeBox.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		/* Views */
+		ABCDEF1234567911 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ABCDEF1234567895 /* CourseView.swift */,
+				ABCDEF1234567897 /* ScoringView.swift */,
+				ABCDEF1234567899 /* CourseMapView.swift */,
+				ABCDEF1234567901 /* TeeBoxSelectionView.swift */,
+				ABCDEF1234567903 /* ScoreInputView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		/* ViewModels */
+		ABCDEF1234567912 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				ABCDEF1234567905 /* CourseViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		/* Managers */
+		ABCDEF1234567913 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				ABCDEF1234567907 /* LocationManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		/* Data */
+		ABCDEF1234567914 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				ABCDEF1234567909 /* SampleCourses.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		/* End PBXGroup section */
@@ -131,6 +229,27 @@
 				1A1A1A1A1A1A1A1A1A1A1A1A /* Nuts2PinApp.swift in Sources */,
 				1A1A1A1A1A1A1A1A1A1A1A2E /* CourseViewModel.swift in Sources */,
 				1A1A1A1A1A1A1A1A1A1A1A30 /* SplashScreenView.swift in Sources */,
+				1A1A1A1A1A1A1A1A1A1A1A32 /* Course.swift in Sources */,
+				1A1A1A1A1A1A1A1A1A1A1A34 /* CourseView.swift in Sources */,
+				1A1A1A1A1A1A1A1A1A1A1A36 /* ScoringView.swift in Sources */,
+				1A1A1A1A1A1A1A1A1A1A1A38 /* CourseMapView.swift in Sources */,
+				1A1A1A1A1A1A1A1A1A1A1A3A /* LocationManager.swift in Sources */,
+				1A1A1A1A1A1A1A1A1A1A1A3C /* SampleCourses.swift in Sources */,
+				/* Models */
+				ABCDEF1234567890 /* Course.swift in Sources */,
+				ABCDEF1234567892 /* TeeBox.swift in Sources */,
+				/* Views */
+				ABCDEF1234567894 /* CourseView.swift in Sources */,
+				ABCDEF1234567896 /* ScoringView.swift in Sources */,
+				ABCDEF1234567898 /* CourseMapView.swift in Sources */,
+				ABCDEF1234567900 /* TeeBoxSelectionView.swift in Sources */,
+				ABCDEF1234567902 /* ScoreInputView.swift in Sources */,
+				/* ViewModels */
+				ABCDEF1234567904 /* CourseViewModel.swift in Sources */,
+				/* Managers */
+				ABCDEF1234567906 /* LocationManager.swift in Sources */,
+				/* Data */
+				ABCDEF1234567908 /* SampleCourses.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,13 +380,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_ASSET_PATHS = "\"nuts2pin/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = nuts2pin/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -278,7 +396,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gfylak.nuts2pin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.geoffreyfylak.nuts2pin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -291,13 +409,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_ASSET_PATHS = "\"nuts2pin/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = nuts2pin/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -308,7 +425,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gfylak.nuts2pin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.geoffreyfylak.nuts2pin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

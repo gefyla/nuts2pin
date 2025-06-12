@@ -3,117 +3,143 @@ import MapKit
 
 struct CourseView: View {
     @EnvironmentObject var viewModel: CourseViewModel
-    @State private var showingCourseSelection = false
     @State private var showingTeeBoxSelection = false
     @State private var showingScoreInput = false
     
     var body: some View {
         NavigationView {
-            Group {
+            VStack {
                 if let course = viewModel.currentCourse {
-                    VStack {
-                        // Map View
-                        CourseMapView(
-                            hole: viewModel.currentHole,
-                            userLocation: viewModel.userLocation,
-                            isRealistic: viewModel.isMapRealistic
-                        )
-                        .frame(height: 300)
+                    // Course Header
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(course.name)
+                            .font(.title)
+                            .bold()
                         
-                        // Hole Information
-                        VStack(spacing: 10) {
+                        HStack {
+                            Text("Par \(course.totalPar)")
+                            Text("•")
+                            Text("\(course.totalDistance) yards")
+                        }
+                        .foregroundColor(.secondary)
+                    }
+                    .padding()
+                    
+                    // Current Hole Info
+                    if let currentHole = viewModel.currentHole {
+                        VStack(spacing: 16) {
                             HStack {
-                                Text("Hole \(viewModel.currentHole?.number ?? 0)")
-                                    .font(.title)
+                                VStack(alignment: .leading) {
+                                    Text("Hole \(currentHole.number)")
+                                        .font(.title2)
+                                        .bold()
+                                    Text("Par \(currentHole.par) • \(currentHole.distance) yards")
+                                        .foregroundColor(.secondary)
+                                }
+                                
                                 Spacer()
-                                Text("Par \(viewModel.currentHole?.par ?? 0)")
-                                    .font(.title2)
-                            }
-                            
-                            HStack {
-                                Text("\(viewModel.currentHole?.distance ?? 0) yards")
-                                    .font(.title3)
-                                Spacer()
-                                Button(action: { showingTeeBoxSelection = true }) {
-                                    Text(viewModel.selectedTeeBox)
-                                        .font(.title3)
+                                
+                                Button(action: {
+                                    showingScoreInput = true
+                                }) {
+                                    Text("Enter Score")
+                                        .bold()
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 16)
+                                        .padding(.vertical, 8)
+                                        .background(Color.blue)
+                                        .cornerRadius(8)
                                 }
                             }
-                        }
-                        .padding()
-                        
-                        // Navigation Buttons
-                        HStack {
-                            Button(action: viewModel.previousHole) {
-                                Image(systemName: "chevron.left")
-                                    .font(.title)
-                            }
-                            .disabled(viewModel.currentHole?.number == 1)
                             
-                            Spacer()
+                            // Map View
+                            CourseMapView(
+                                currentHole: currentHole,
+                                userLocation: viewModel.userLocation,
+                                isMapRealistic: viewModel.isMapRealistic
+                            )
+                            .frame(height: 300)
+                            .cornerRadius(12)
                             
-                            Button(action: { showingScoreInput = true }) {
-                                Text("Enter Score")
-                                    .font(.headline)
-                                    .padding()
-                                    .background(Color.blue)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(10)
-                            }
-                            
-                            Spacer()
-                            
-                            Button(action: viewModel.nextHole) {
-                                Image(systemName: "chevron.right")
-                                    .font(.title)
-                            }
-                            .disabled(viewModel.currentHole?.number == viewModel.currentCourse?.holes.count)
-                        }
-                        .padding()
-                        
-                        Spacer()
-                    }
-                    .navigationTitle(course.name)
-                    .navigationBarItems(trailing: Button("Change Course") {
-                        showingCourseSelection = true
-                    })
-                } else {
-                    // No Course Selected View
-                    VStack(spacing: 20) {
-                        Image(systemName: "figure.golf")
-                            .font(.system(size: 80))
-                            .foregroundColor(.blue)
-                        
-                        Text("No Course Selected")
-                            .font(.title)
-                        
-                        Text("Select a course to start playing")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                        
-                        Button(action: { showingCourseSelection = true }) {
-                            Text("Select Course")
-                                .font(.headline)
+                            // Hazards
+                            if !currentHole.hazards.isEmpty {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("Hazards")
+                                        .font(.headline)
+                                    
+                                    ForEach(currentHole.hazards) { hazard in
+                                        HStack {
+                                            Image(systemName: hazard.type == .water ? "drop.fill" : "circle.fill")
+                                                .foregroundColor(hazard.type == .water ? .blue : .brown)
+                                            Text(hazard.description)
+                                        }
+                                    }
+                                }
                                 .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
+                                .background(Color(.systemGray6))
+                                .cornerRadius(12)
+                            }
+                            
+                            // Navigation Buttons
+                            HStack {
+                                Button(action: {
+                                    viewModel.moveToPreviousHole()
+                                }) {
+                                    HStack {
+                                        Image(systemName: "chevron.left")
+                                        Text("Previous")
+                                    }
+                                    .foregroundColor(.blue)
+                                }
+                                .disabled(viewModel.currentHole?.number == 1)
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    showingTeeBoxSelection = true
+                                }) {
+                                    HStack {
+                                        Image(systemName: "flag.fill")
+                                        Text(viewModel.selectedTeeBox.displayName)
+                                    }
+                                    .foregroundColor(.blue)
+                                }
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    viewModel.moveToNextHole()
+                                }) {
+                                    HStack {
+                                        Text("Next")
+                                        Image(systemName: "chevron.right")
+                                    }
+                                    .foregroundColor(.blue)
+                                }
+                                .disabled(viewModel.currentHole?.number == course.holes.count)
+                            }
+                            .padding()
                         }
+                        .padding()
+                    } else {
+                        Text("Select a hole to begin")
+                            .foregroundColor(.secondary)
                     }
-                    .navigationTitle("Select Course")
+                } else {
+                    Text("No course selected")
+                        .foregroundColor(.secondary)
                 }
             }
-        }
-        .sheet(isPresented: $showingCourseSelection) {
-            CourseSelectionView()
-        }
-        .sheet(isPresented: $showingTeeBoxSelection) {
-            TeeBoxSelectionView(selectedTeeBox: $viewModel.selectedTeeBox)
-        }
-        .sheet(isPresented: $showingScoreInput) {
-            if let hole = viewModel.currentHole {
-                ScoreInputView(hole: hole) { score in
-                    viewModel.updateScore(for: hole, score: score)
+            .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $showingTeeBoxSelection) {
+                TeeBoxSelectionView(
+                    selectedTeeBox: $viewModel.selectedTeeBox,
+                    teeBoxes: TeeBox.allCases
+                )
+            }
+            .sheet(isPresented: $showingScoreInput) {
+                if let currentHole = viewModel.currentHole {
+                    ScoreInputView(viewModel: viewModel, hole: currentHole)
                 }
             }
         }
@@ -121,10 +147,9 @@ struct CourseView: View {
 }
 
 struct TeeBoxSelectionView: View {
-    @Binding var selectedTeeBox: String
+    @Binding var selectedTeeBox: TeeBox
+    let teeBoxes: [TeeBox]
     @Environment(\.presentationMode) var presentationMode
-    
-    let teeBoxes = ["Black", "Blue", "White", "Red"]
     
     var body: some View {
         NavigationView {
@@ -134,9 +159,9 @@ struct TeeBoxSelectionView: View {
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     HStack {
-                        Text(teeBox)
+                        Text(teeBox.displayName)
                         Spacer()
-                        if teeBox == selectedTeeBox {
+                        if selectedTeeBox == teeBox {
                             Image(systemName: "checkmark")
                                 .foregroundColor(.blue)
                         }
@@ -152,14 +177,14 @@ struct TeeBoxSelectionView: View {
 }
 
 struct ScoreInputView: View {
+    @StateObject private var viewModel: CourseViewModel
     let hole: Hole
-    let onScoreEntered: (Int) -> Void
     @Environment(\.presentationMode) var presentationMode
     @State private var selectedScore: Int
     
-    init(hole: Hole, onScoreEntered: @escaping (Int) -> Void) {
+    init(viewModel: CourseViewModel, hole: Hole) {
+        self.viewModel = viewModel
         self.hole = hole
-        self.onScoreEntered = onScoreEntered
         _selectedScore = State(initialValue: hole.score ?? hole.par)
     }
     
@@ -188,7 +213,7 @@ struct ScoreInputView: View {
                 }
                 
                 Button(action: {
-                    onScoreEntered(selectedScore)
+                    viewModel.updateScore(for: hole, score: selectedScore)
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Save Score")
@@ -213,5 +238,5 @@ struct ScoreInputView: View {
 
 #Preview {
     CourseView()
-        .environmentObject(LocationManager())
+        .environmentObject(CourseViewModel())
 } 

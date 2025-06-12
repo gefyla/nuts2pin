@@ -2,14 +2,23 @@ import SwiftUI
 import MapKit
 
 struct CourseMapView: View {
-    let hole: Hole?
-    let userLocation: CLLocationCoordinate2D?
-    let isRealistic: Bool
+    let currentHole: Hole
+    let userLocation: CLLocation?
+    let isMapRealistic: Bool
     
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 36.5683, longitude: -121.9497), // Pebble Beach
-        span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-    )
+    @State private var region: MKCoordinateRegion
+    
+    init(currentHole: Hole, userLocation: CLLocation?, isMapRealistic: Bool) {
+        self.currentHole = currentHole
+        self.userLocation = userLocation
+        self.isMapRealistic = isMapRealistic
+        
+        // Initialize region to center on the tee box
+        _region = State(initialValue: MKCoordinateRegion(
+            center: currentHole.teeLocation.clCoordinate,
+            span: MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
+        ))
+    }
     
     var body: some View {
         Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: annotations) { annotation in
@@ -17,11 +26,8 @@ struct CourseMapView: View {
                 annotation.view
             }
         }
-        .mapStyle(isRealistic ? .standard : .hybrid)
+        .mapStyle(isMapRealistic ? .standard : .hybrid)
         .onAppear {
-            updateRegion()
-        }
-        .onChange(of: hole) { _ in
             updateRegion()
         }
     }
@@ -29,54 +35,60 @@ struct CourseMapView: View {
     private var annotations: [MapAnnotation] {
         var annotations: [MapAnnotation] = []
         
-        if let hole = hole {
-            // Add tee box
+        // Add tee box
+        annotations.append(MapAnnotation(
+            coordinate: currentHole.teeLocation.clCoordinate,
+            view: AnyView(
+                Image(systemName: "flag.fill")
+                    .foregroundColor(.blue)
+                    .font(.title)
+            )
+        ))
+        
+        // Add pin
+        annotations.append(MapAnnotation(
+            coordinate: currentHole.pinLocation.clCoordinate,
+            view: AnyView(
+                Image(systemName: "mappin.circle.fill")
+                    .foregroundColor(.red)
+                    .font(.title)
+            )
+        ))
+        
+        // Add hazards
+        for hazard in currentHole.hazards {
             annotations.append(MapAnnotation(
-                coordinate: hole.teeLocation.clCoordinate,
+                coordinate: hazard.location.clCoordinate,
                 view: AnyView(
-                    Image(systemName: "flag.fill")
-                        .foregroundColor(.blue)
-                        .font(.title)
+                    Image(systemName: hazardIcon(for: hazard.type))
+                        .foregroundColor(hazardColor(for: hazard.type))
+                        .font(.title2)
                 )
             ))
-            
-            // Add pin
-            annotations.append(MapAnnotation(
-                coordinate: hole.pinLocation.clCoordinate,
-                view: AnyView(
-                    Image(systemName: "flag.fill")
-                        .foregroundColor(.red)
-                        .font(.title)
-                )
-            ))
-            
-            // Add hazards
-            for hazard in hole.hazards {
-                annotations.append(MapAnnotation(
-                    coordinate: hazard.location.clCoordinate,
-                    view: AnyView(
-                        Image(systemName: hazardIcon(for: hazard.type))
-                            .foregroundColor(.orange)
-                            .font(.title2)
-                    )
-                ))
-            }
         }
         
         return annotations
     }
     
     private func updateRegion() {
-        guard let hole = hole else { return }
+        var coordinates: [CLLocationCoordinate2D] = [
+            currentHole.teeLocation.clCoordinate,
+            currentHole.pinLocation.clCoordinate
+        ]
         
-        let coordinates = [hole.teeLocation, hole.pinLocation] + hole.hazards.map { $0.location }
-        let latitudes = coordinates.map { $0.latitude }
-        let longitudes = coordinates.map { $0.longitude }
+        // Add hazard locations
+        coordinates.append(contentsOf: currentHole.hazards.map { $0.location.clCoordinate })
         
-        let minLat = latitudes.min() ?? 0
-        let maxLat = latitudes.max() ?? 0
-        let minLon = longitudes.min() ?? 0
-        let maxLon = longitudes.max() ?? 0
+        // Add user location if available
+        if let userLocation = userLocation {
+            coordinates.append(userLocation.coordinate)
+        }
+        
+        // Calculate the center and span
+        let minLat = coordinates.map { $0.latitude }.min() ?? 0
+        let maxLat = coordinates.map { $0.latitude }.max() ?? 0
+        let minLon = coordinates.map { $0.longitude }.min() ?? 0
+        let maxLon = coordinates.map { $0.longitude }.max() ?? 0
         
         let center = CLLocationCoordinate2D(
             latitude: (minLat + maxLat) / 2,
@@ -93,10 +105,35 @@ struct CourseMapView: View {
     
     private func hazardIcon(for type: HazardType) -> String {
         switch type {
-        case .water: return "drop.fill"
-        case .bunker: return "circle.fill"
-        case .outOfBounds: return "exclamationmark.triangle.fill"
-        case .tree: return "leaf.fill"
+        case .bunker:
+            return "circle.fill"
+        case .water:
+            return "drop.fill"
+        case .outOfBounds:
+            return "xmark.circle.fill"
+        case .rough:
+            return "leaf.fill"
+        case .fairway:
+            return "arrow.up.circle.fill"
+        case .green:
+            return "circle.circle.fill"
+        }
+    }
+    
+    private func hazardColor(for type: HazardType) -> Color {
+        switch type {
+        case .bunker:
+            return .brown
+        case .water:
+            return .blue
+        case .outOfBounds:
+            return .red
+        case .rough:
+            return .green
+        case .fairway:
+            return .green
+        case .green:
+            return .green
         }
     }
 }
@@ -105,4 +142,22 @@ struct MapAnnotation: Identifiable {
     let id = UUID()
     let coordinate: CLLocationCoordinate2D
     let view: AnyView
+}
+
+#Preview {
+    CourseMapView(
+        currentHole: Hole(
+            number: 1,
+            par: 4,
+            distance: 380,
+            teeLocation: Coordinate(latitude: 36.5683, longitude: -121.9497),
+            pinLocation: Coordinate(latitude: 36.5685, longitude: -121.9490),
+            hazards: [
+                Hazard(type: .bunker, location: Coordinate(latitude: 36.5684, longitude: -121.9493), description: "Fairway bunker"),
+                Hazard(type: .water, location: Coordinate(latitude: 36.5686, longitude: -121.9488), description: "Ocean")
+            ]
+        ),
+        userLocation: nil,
+        isMapRealistic: true
+    )
 } 

@@ -1,72 +1,62 @@
-# Nuts2Pin Golf App
+# Nuts2Pin
 
-A personalized golf enhancement application for iOS, similar to 18 Birdies but with custom features and offline-first functionality.
+A golf course companion app that helps you track your game and navigate the course.
 
 ## Features
 
-### Core Functionality
-- GPS Distance Tracking
-  - Real-time distance to green/hole
-  - Custom point-to-point distance measurement
-  - Shot distance tracking with club statistics
-- Course Visualization
-  - Realistic mode (natural colors)
-  - Cartoon mode (exaggerated colors for water/grass)
-  - Aerial course view with offline capability
-- Scoring & Statistics
-  - Score tracking
-  - Shot tracking with club selection
-  - Club distance statistics
-  - Advanced statistical analysis
+- Course selection and navigation
+- Real-time GPS tracking on course map
+- Score tracking with statistics
+- Tee box selection
+- Hazard information
+- Front nine and back nine scoring
+- Realistic and satellite map views
 
-### Technical Details
-- iOS native app built with Swift/SwiftUI
-- Offline-first architecture
-- Local database storage
-- Built using GitHub Actions with Mac runners
-- Designed for sideloading via Sideloadly
+## Requirements
 
-## Development Setup
+- iOS 17.0+
+- Xcode 15.0+
+- Swift 5.9+
 
-### Requirements
-- iOS device for testing
-- Sideloadly for app installation
+## Installation
 
-### Building the Project
-The app is automatically built using GitHub Actions whenever changes are pushed to the main branch. The build process:
-1. Uses Mac runners with Xcode 16+
-2. Builds the app without code signing (for sideloading)
-3. Generates an IPA file
-4. Uploads the IPA as a build artifact
+1. Clone the repository
+2. Open `nuts2pin.xcodeproj` in Xcode
+3. Build and run the project
 
-To get the latest build:
-1. Go to the Actions tab in this repository
-2. Find the latest successful build
-3. Download the nuts2pin.ipa artifact
-4. Use Sideloadly to install on your iOS device
+## Usage
 
-## Project Structure
-```
-nuts2pin/
-├── Sources/
-│   ├── App/
-│   ├── Features/
-│   │   ├── CourseView/
-│   │   ├── DistanceTracking/
-│   │   ├── Scoring/
-│   │   └── Statistics/
-│   ├── Core/
-│   │   ├── Location/
-│   │   ├── Database/
-│   │   └── Maps/
-│   └── UI/
-│       ├── Components/
-│       └── Styles/
-├── Resources/
-│   ├── Maps/
-│   └── Assets/
-└── Tests/
-```
+### Course Selection
+- Tap the "Select Course" button to choose from available courses
+- Select your preferred tee box
+- View course information and statistics
+
+### Scoring
+- Enter scores for each hole
+- Track putts, fairways hit, and greens in regulation
+- View front nine and back nine totals
+- See your score relative to par
+
+### Course Map
+- View your position on the course
+- See tee boxes, pins, and hazards
+- Toggle between realistic and satellite views
+- Get distances to targets
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
-MIT License - See LICENSE file for details
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Pebble Beach Golf Links for course data
+- Apple Maps for location services
+- SwiftUI for the user interface

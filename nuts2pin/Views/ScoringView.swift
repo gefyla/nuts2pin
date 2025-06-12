@@ -9,177 +9,195 @@ struct ScoringView: View {
         NavigationView {
             VStack {
                 if let course = viewModel.currentCourse {
-                    // Scorecard Header
-                    HStack {
+                    // Course Header
+                    VStack(alignment: .leading, spacing: 8) {
                         Text(course.name)
                             .font(.title)
-                        Spacer()
-                        Text("Total: \(viewModel.totalScore)")
-                            .font(.title2)
+                            .bold()
+                        
+                        HStack {
+                            Text("Total Score: \(viewModel.getTotalScore())")
+                            Text("•")
+                            Text("To Par: \(formatScoreToPar(viewModel.getScoreToPar()))")
+                                .foregroundColor(scoreColor(viewModel.getScoreToPar()))
+                        }
+                        .font(.headline)
                     }
                     .padding()
                     
                     // Scorecard
                     ScrollView {
                         VStack(spacing: 0) {
-                            // Header Row
+                            // Header
                             HStack {
                                 Text("Hole")
-                                    .frame(width: 40)
+                                    .frame(width: 60, alignment: .leading)
                                 Text("Par")
-                                    .frame(width: 40)
+                                    .frame(width: 60, alignment: .center)
                                 Text("Score")
-                                    .frame(width: 60)
+                                    .frame(width: 60, alignment: .center)
                                 Text("+/-")
-                                    .frame(width: 40)
+                                    .frame(width: 60, alignment: .center)
                             }
                             .font(.headline)
                             .padding(.vertical, 8)
-                            .background(Color.gray.opacity(0.2))
+                            .background(Color(.systemGray6))
                             
-                            // Hole Rows
-                            ForEach(course.holes) { hole in
-                                Button(action: {
-                                    selectedHole = hole
-                                    showingScoreInput = true
-                                }) {
-                                    HStack {
-                                        Text("\(hole.number)")
-                                            .frame(width: 40)
-                                        Text("\(hole.par)")
-                                            .frame(width: 40)
-                                        Text(hole.score.map(String.init) ?? "-")
-                                            .frame(width: 60)
-                                        Text(scoreToPar(hole))
-                                            .frame(width: 40)
-                                            .foregroundColor(scoreColor(hole))
+                            // Front Nine
+                            ForEach(course.holes.prefix(9)) { hole in
+                                ScorecardRow(
+                                    hole: hole,
+                                    score: viewModel.getScore(for: hole),
+                                    onTap: {
+                                        selectedHole = hole
+                                        showingScoreInput = true
                                     }
-                                    .padding(.vertical, 8)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                                
-                                if hole.number != course.holes.count {
-                                    Divider()
-                                }
+                                )
                             }
                             
-                            // Totals Row
-                            Divider()
-                                .padding(.vertical, 8)
+                            // Front Nine Totals
+                            HStack {
+                                Text("Front")
+                                    .frame(width: 60, alignment: .leading)
+                                Text("\(course.frontNinePar)")
+                                    .frame(width: 60, alignment: .center)
+                                Text("\(viewModel.getTotalScore(frontNine: true))")
+                                    .frame(width: 60, alignment: .center)
+                                Text(formatScoreToPar(viewModel.getScoreToPar(frontNine: true)))
+                                    .frame(width: 60, alignment: .center)
+                                    .foregroundColor(scoreColor(viewModel.getScoreToPar(frontNine: true)))
+                            }
+                            .font(.headline)
+                            .padding(.vertical, 8)
+                            .background(Color(.systemGray6))
                             
+                            // Back Nine
+                            ForEach(course.holes.suffix(9)) { hole in
+                                ScorecardRow(
+                                    hole: hole,
+                                    score: viewModel.getScore(for: hole),
+                                    onTap: {
+                                        selectedHole = hole
+                                        showingScoreInput = true
+                                    }
+                                )
+                            }
+                            
+                            // Back Nine Totals
+                            HStack {
+                                Text("Back")
+                                    .frame(width: 60, alignment: .leading)
+                                Text("\(course.backNinePar)")
+                                    .frame(width: 60, alignment: .center)
+                                Text("\(viewModel.getTotalScore(backNine: true))")
+                                    .frame(width: 60, alignment: .center)
+                                Text(formatScoreToPar(viewModel.getScoreToPar(backNine: true)))
+                                    .frame(width: 60, alignment: .center)
+                                    .foregroundColor(scoreColor(viewModel.getScoreToPar(backNine: true)))
+                            }
+                            .font(.headline)
+                            .padding(.vertical, 8)
+                            .background(Color(.systemGray6))
+                            
+                            // Total
                             HStack {
                                 Text("Total")
-                                    .frame(width: 40)
+                                    .frame(width: 60, alignment: .leading)
                                 Text("\(course.totalPar)")
-                                    .frame(width: 40)
-                                Text("\(viewModel.totalScore)")
-                                    .frame(width: 60)
-                                Text("\(viewModel.scoreToPar)")
-                                    .frame(width: 40)
-                                    .foregroundColor(scoreColor(viewModel.scoreToPar))
+                                    .frame(width: 60, alignment: .center)
+                                Text("\(viewModel.getTotalScore())")
+                                    .frame(width: 60, alignment: .center)
+                                Text(formatScoreToPar(viewModel.getScoreToPar()))
+                                    .frame(width: 60, alignment: .center)
+                                    .foregroundColor(scoreColor(viewModel.getScoreToPar()))
                             }
                             .font(.headline)
                             .padding(.vertical, 8)
+                            .background(Color(.systemGray6))
                         }
                         .padding()
                     }
                 } else {
-                    // No Course Selected
-                    VStack(spacing: 20) {
-                        Image(systemName: "list.bullet.clipboard")
-                            .font(.system(size: 80))
-                            .foregroundColor(.blue)
-                        
-                        Text("No Course Selected")
-                            .font(.title)
-                        
-                        Text("Select a course to view your scorecard")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                    }
+                    Text("Select a course to view scorecard")
+                        .foregroundColor(.secondary)
                 }
             }
-            .navigationTitle("Scorecard")
-        }
-        .sheet(isPresented: $showingScoreInput) {
-            if let hole = selectedHole {
-                ScoreInputView(hole: hole) { score in
-                    viewModel.updateScore(for: hole, score: score)
+            .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $showingScoreInput) {
+                if let hole = selectedHole {
+                    ScoreInputView(viewModel: viewModel, hole: hole)
                 }
             }
         }
     }
     
-    private func scoreToPar(_ hole: Hole) -> String {
-        guard let score = hole.score else { return "-" }
-        let diff = score - hole.par
-        return diff > 0 ? "+\(diff)" : "\(diff)"
-    }
-    
-    private func scoreColor(_ hole: Hole) -> Color {
-        guard let score = hole.score else { return .primary }
-        let diff = score - hole.par
-        switch diff {
-        case ..<0: return .green
-        case 0: return .blue
-        default: return .red
+    private func formatScoreToPar(_ score: Int) -> String {
+        if score > 0 {
+            return "+\(score)"
+        } else {
+            return "\(score)"
         }
     }
     
     private func scoreColor(_ score: Int) -> Color {
-        switch score {
-        case ..<0: return .green
-        case 0: return .blue
-        default: return .red
+        if score < 0 {
+            return .red
+        } else if score > 0 {
+            return .blue
+        } else {
+            return .primary
         }
     }
 }
 
-struct ScoreInputView: View {
-    @ObservedObject var viewModel: CourseViewModel
-    @Environment(\.presentationMode) var presentationMode
-    @State private var selectedScore: Int?
+struct ScorecardRow: View {
+    let hole: Hole
+    let score: Int?
+    let onTap: () -> Void
     
     var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                if let hole = viewModel.currentHole {
-                    Text("Hole \(hole.number)")
-                        .font(.title)
-                    
-                    Text("Par \(hole.par)")
-                        .font(.headline)
-                    
-                    // Score selection buttons
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 20) {
-                        ForEach(1...12, id: \.self) { score in
-                            Button(action: {
-                                selectedScore = score
-                                if let index = viewModel.currentCourse?.holes.firstIndex(where: { $0.id == hole.id }) {
-                                    viewModel.currentCourse?.holes[index].score = score
-                                }
-                                presentationMode.wrappedValue.dismiss()
-                            }) {
-                                Text("\(score)")
-                                    .font(.title2)
-                                    .frame(width: 60, height: 60)
-                                    .background(selectedScore == score ? Color.blue : Color.gray.opacity(0.2))
-                                    .foregroundColor(selectedScore == score ? .white : .primary)
-                                    .cornerRadius(10)
-                            }
-                        }
-                    }
-                    .padding()
+        Button(action: onTap) {
+            HStack {
+                Text("\(hole.number)")
+                    .frame(width: 60, alignment: .leading)
+                Text("\(hole.par)")
+                    .frame(width: 60, alignment: .center)
+                Text(score.map { "\($0)" } ?? "-")
+                    .frame(width: 60, alignment: .center)
+                if let score = score {
+                    Text(formatScoreToPar(score - hole.par))
+                        .frame(width: 60, alignment: .center)
+                        .foregroundColor(scoreColor(score - hole.par))
+                } else {
+                    Text("-")
+                        .frame(width: 60, alignment: .center)
                 }
             }
-            .navigationTitle("Enter Score")
-            .navigationBarItems(trailing: Button("Cancel") {
-                presentationMode.wrappedValue.dismiss()
-            })
+            .padding(.vertical, 8)
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+    
+    private func formatScoreToPar(_ score: Int) -> String {
+        if score > 0 {
+            return "+\(score)"
+        } else {
+            return "\(score)"
+        }
+    }
+    
+    private func scoreColor(_ score: Int) -> Color {
+        if score < 0 {
+            return .red
+        } else if score > 0 {
+            return .blue
+        } else {
+            return .primary
         }
     }
 }
 
 #Preview {
-    ScoringView(viewModel: CourseViewModel(locationManager: LocationManager()))
+    ScoringView()
+        .environmentObject(CourseViewModel())
 } 

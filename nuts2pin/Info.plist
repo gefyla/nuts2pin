@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Nuts2Pin needs your location to calculate distances to the pin and hazards on the golf course.</string>
+    <string>Nuts2Pin needs your location to show your position on the course map and calculate distances to the pin.</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Nuts2Pin needs your location to calculate distances to the pin and hazards on the golf course.</string>
+    <string>Nuts2Pin needs your location to show your position on the course map and calculate distances to the pin.</string>
     <key>UIBackgroundModes</key>
     <array>
         <string>location</string>

@@ -3,27 +3,24 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var viewModel = CourseViewModel()
     @StateObject private var locationManager = LocationManager()
-    @State private var selectedTab = 0
+    @State private var showingTeeBoxSelection = false
     
     var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView {
             CourseView()
                 .tabItem {
-                    Label("Course", systemImage: "map")
+                    Label("Course", systemImage: "figure.golf")
                 }
-                .tag(0)
             
             ScoringView()
                 .tabItem {
                     Label("Scorecard", systemImage: "list.bullet.clipboard")
                 }
-                .tag(1)
             
             SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
-                .tag(2)
         }
         .environmentObject(viewModel)
         .environmentObject(locationManager)
@@ -37,15 +34,17 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("App Settings")) {
+                Section(header: Text("Course Settings")) {
                     Toggle("Realistic Map Style", isOn: $viewModel.isMapRealistic)
                     
-                    Button(action: { showingTeeBoxSelection = true }) {
+                    Button(action: {
+                        showingTeeBoxSelection = true
+                    }) {
                         HStack {
                             Text("Default Tee Box")
                             Spacer()
-                            Text(viewModel.selectedTeeBox)
-                                .foregroundColor(.gray)
+                            Text(viewModel.selectedTeeBox.displayName)
+                                .foregroundColor(.secondary)
                         }
                     }
                 }
@@ -57,42 +56,83 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
-        }
-        .sheet(isPresented: $showingTeeBoxSelection) {
-            TeeBoxSelectionView(selectedTeeBox: $viewModel.selectedTeeBox)
+            .sheet(isPresented: $showingTeeBoxSelection) {
+                TeeBoxSelectionView(
+                    selectedTeeBox: $viewModel.selectedTeeBox,
+                    teeBoxes: TeeBox.allCases
+                )
+            }
         }
     }
 }
 
 struct AboutView: View {
     var body: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "figure.golf")
-                .font(.system(size: 80))
-                .foregroundColor(.blue)
-            
-            Text("Nuts2Pin")
-                .font(.title)
-            
-            Text("Version 1.0")
-                .font(.subheadline)
-                .foregroundColor(.gray)
-            
-            Text("Your personal golf companion")
-                .font(.headline)
-                .multilineTextAlignment(.center)
+        List {
+            Section {
+                VStack(spacing: 16) {
+                    Image(systemName: "figure.golf")
+                        .font(.system(size: 60))
+                        .foregroundColor(.blue)
+                    
+                    Text("Nuts2Pin")
+                        .font(.title)
+                        .bold()
+                    
+                    Text("Version 1.0.0")
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity)
                 .padding()
+            }
             
-            Spacer()
+            Section(header: Text("Description")) {
+                Text("Nuts2Pin is a golf course companion app that helps you track your game and navigate the course. Features include:")
+                    .padding(.vertical, 8)
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    FeatureRow(icon: "map", text: "Interactive course map")
+                    FeatureRow(icon: "list.bullet.clipboard", text: "Digital scorecard")
+                    FeatureRow(icon: "location.fill", text: "Real-time location tracking")
+                    FeatureRow(icon: "flag.fill", text: "Multiple tee box options")
+                }
+            }
+            
+            Section(header: Text("Contact")) {
+                Link(destination: URL(string: "mailto:support@nuts2pin.com")!) {
+                    HStack {
+                        Image(systemName: "envelope.fill")
+                        Text("Email Support")
+                    }
+                }
+                
+                Link(destination: URL(string: "https://nuts2pin.com")!) {
+                    HStack {
+                        Image(systemName: "globe")
+                        Text("Visit Website")
+                    }
+                }
+            }
         }
-        .padding()
         .navigationTitle("About")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(CourseViewModel())
+struct FeatureRow: View {
+    let icon: String
+    let text: String
+    
+    var body: some View {
+        HStack {
+            Image(systemName: icon)
+                .foregroundColor(.blue)
+                .frame(width: 24)
+            Text(text)
+        }
     }
+}
+
+#Preview {
+    ContentView()
 } 
