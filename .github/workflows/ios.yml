@@ -30,7 +30,8 @@ jobs:
                                  -configuration Release \
                                  -archivePath "build/nuts2pin.xcarchive" \
                                  CODE_SIGNING_ALLOWED=NO \
-                                 CODE_SIGN_IDENTITY=""
+                                 CODE_SIGN_IDENTITY="" \
+                                 DEVELOPMENT_TEAM="0000000000"
 
     - name: Export IPA
       run: |

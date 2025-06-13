@@ -7,4 +7,4 @@ struct Nuts2PinApp: App {
             ContentView()
         }
     }
-} 
+}
