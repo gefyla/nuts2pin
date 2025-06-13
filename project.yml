@@ -10,6 +10,7 @@ targets:
     sources: [nuts2pin]
     settings:
       base:
+        DEVELOPMENT_TEAM: 0000000000
         PRODUCT_BUNDLE_IDENTIFIER: com.nuts2pin.app
         SWIFT_VERSION: 5.0
         TARGETED_DEVICE_FAMILY: "1,2"
